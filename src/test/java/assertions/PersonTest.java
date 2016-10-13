@@ -31,6 +31,7 @@ public class PersonTest {
         throw new NotImplementedException();
     }
 
+
     @Test
     public void getAgeReturns1DayIfYesterday() throws Exception {
         Person p = new Person("", "", LocalDate.now().minusDays(1));
