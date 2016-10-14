@@ -8,14 +8,35 @@ import java.time.Period;
  */
 public class Person {
 
-    private final String firstName;
-    private final String lastName;
-    private final LocalDate birthDate;
+    private String firstName = null;
+    private String lastName = null;
+    private LocalDate birthDate = null;
 
     public Person(String firstName, String lastName, LocalDate birthDate) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthDate = birthDate;
+        if(isValidString(firstName)){
+            this.firstName = firstName.trim();
+        }
+        if(isValidString(lastName)){
+            this.lastName = lastName.trim();
+        }
+        if(isValidDate(birthDate)) {
+            this.birthDate = birthDate;
+        }
+    }
+
+    private boolean isValidDate(LocalDate date)throws IllegalArgumentException{
+
+        if(date == null || date.isAfter(LocalDate.now())){
+            throw new IllegalArgumentException("not allowed null or date after actual time for birthDate");
+        }
+        return  true;
+    }
+
+    private boolean isValidString(String inString)throws IllegalArgumentException{
+        if(inString == null || inString.trim().isEmpty()){
+            throw new IllegalArgumentException("not allowed empty String or null");
+        }
+        return  true;
     }
 
     public String getFullName(){
