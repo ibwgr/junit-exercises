@@ -19,7 +19,15 @@ public class Person {
     }
 
     public String getFullName(){
-        return firstName + " " + lastName;
+        if (lastName != null && firstName != null) {
+            return firstName + " " + lastName;
+        } else if (lastName != null && firstName == null) {
+            return lastName;
+        } else if (lastName == null && firstName != null) {
+            return firstName;
+        } else {
+            return null;
+        }
     }
 
     public Period getAge(){

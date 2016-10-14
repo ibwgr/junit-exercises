@@ -1,5 +1,6 @@
 package assertions;
 
+import org.junit.Assert;
 import org.junit.Test;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -11,20 +12,42 @@ import java.time.LocalDate;
  */
 public class PersonTest {
 
-    // getFullName
+    // getFullName Tests
 
     @Test
     public void getFullNameReturnsFirstnameSpaceLastname(){
-        // TODO implement
-        throw new NotImplementedException();
+        //System under test (SUT)
+        Person p = new Person("Hans", "Muster", LocalDate.now());
+        String fullName = p.getFullName();
+        Assert.assertEquals("Hans Muster", fullName);
     }
 
-    // TODO some more useful tests
+    //  some more useful tests, z.B. Test ohne Nachnamen
+    //  allenfalls auch die Personenklasse anpassen
+
+    @Test
+    public void getFullNameOnlyWithNachnameReturnOnlyNachname(){
+        //System under test (SUT)
+        Person p = new Person("Hans", null, LocalDate.now());
+        String fullName = p.getFullName();
+        Assert.assertEquals("Hans", fullName);
+    }
+
+    @Test
+    public void getFullNameOnlyWithVornameReturnOnlyVorname(){
+        //System under test (SUT)
+        Person p = new Person(null, "Muster", LocalDate.now());
+        String fullName = p.getFullName();
+        Assert.assertEquals("Muster", fullName);
+    }
+
+
+
 
     // getAge
 
 
-    // TODO verbessern. Hinweis: Repeatable (wiederholbar) zu jeder Zeit.
+    // TODO verbessern. Hinweis: Repeatable (wiederholbar) zu jeder Zeit (auch naechstes Jahr noch!)
     @Test
     public void getAgeReturns10YearsIf2006() throws Exception {
         Person p = new Person("", "", LocalDate.of(2006, 1, 1));
