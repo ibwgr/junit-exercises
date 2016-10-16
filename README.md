@@ -8,6 +8,8 @@
     1. Alle Dialoge mit "next" durchklicken
 1. Rechtsklick auf PersonTest > Run 'PersonTest'
     1. Die Tests sollten nun alle durchlaufen, wobei die meisten davon mit einer NotImplementedException fehlschlagen
+1. `git remote add upstream https://github.com/ibwgr/junit-exercises.git`
+    1. Lokalen master aktualisieren mit Änderungen vom Lehrer (z.B. Musterlösungen oder neuen Übungen): `git pull upstream master`
     
     
 ### Bei Problemen
