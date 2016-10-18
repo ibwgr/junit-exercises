@@ -8,6 +8,8 @@ import java.time.Period;
  */
 public class Person {
 
+    protected static final String NO_NAME = "no name";
+
     private final String firstName;
     private final String lastName;
     private final LocalDate birthDate;
@@ -26,7 +28,7 @@ public class Person {
         } else if (lastName == null && firstName != null) {
             return firstName;
         } else {
-            return null;
+            return "no name";
         }
     }
 

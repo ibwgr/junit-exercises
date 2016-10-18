@@ -12,7 +12,9 @@ import java.time.LocalDate;
  */
 public class PersonTest {
 
+    //---------------------------
     // getFullName Tests
+    //---------------------------
 
     @Test
     public void getFullNameReturnsFirstnameSpaceLastname(){
@@ -22,9 +24,7 @@ public class PersonTest {
         Assert.assertEquals("Hans Muster", fullName);
     }
 
-    //  some more useful tests, z.B. Test ohne Nachnamen
-    //  allenfalls auch die Personenklasse anpassen
-
+    //  some more useful tests, z.B. Test ohne Nachnamen, allenfalls auch die Personenklasse anpassen
     @Test
     public void getFullNameOnlyWithNachnameReturnOnlyNachname(){
         //System under test (SUT)
@@ -41,26 +41,41 @@ public class PersonTest {
         Assert.assertEquals("Muster", fullName);
     }
 
+    @Test
+    public void getFullNameWithoutNamesReturnNoName(){
+        //System under test (SUT)
+        Person p = new Person(null, null, LocalDate.now());
+        String fullName = p.getFullName();
+        Assert.assertEquals(Person.NO_NAME, fullName);
+    }
 
-
-
+    //---------------------------
     // getAge
+    //---------------------------
 
-
-    // TODO verbessern. Hinweis: Repeatable (wiederholbar) zu jeder Zeit (auch naechstes Jahr noch!)
+    // Hinweis: Wiederholbar zu jeder Zeit (auch naechstes Jahr noch!)
     @Test
     public void getAgeReturns10YearsIf2006() throws Exception {
-        Person p = new Person("", "", LocalDate.of(2006, 1, 1));
-
-        throw new NotImplementedException();
+        LocalDate testdate = LocalDate.of(2010, 1, 1);
+        int theoreticalCalculatedAge = LocalDate.now().getYear() - testdate.getYear();
+        System.out.println("Testdate Year: " +testdate.getYear());
+        System.out.println("Current  Year: " +LocalDate.now().getYear());
+        System.out.println("Years/age which the method should return: " +theoreticalCalculatedAge);
+        //
+        Person p = new Person("", "", testdate);
+        Assert.assertEquals(theoreticalCalculatedAge , p.getAge().getYears());
     }
 
     @Test
     public void getAgeReturns1DayIfYesterday() throws Exception {
         Person p = new Person("", "", LocalDate.now().minusDays(1));
-
-        // TODO implement
-        throw new NotImplementedException();
+        System.out.println(p.getAge().getDays());
     }
-    // TODO some more useful tests
+
+    //---------------------------
+    //
+    //---------------------------
+    // no more tests...
+
+
 }
