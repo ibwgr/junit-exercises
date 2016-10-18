@@ -56,6 +56,15 @@ public class PersonTest {
         new Person("Hans", null, LocalDate.now());
     }
 
+    @Test
+    public void newPersonThrowIllegalArgumentExceptionFirstnameOrLastnameWithNumber(){
+
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("numbers not allowed in name");
+
+        new Person("Hans", "Meier12", LocalDate.now());
+    }
+
     // getAge
 
     @Test
