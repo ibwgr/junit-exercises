@@ -35,11 +35,11 @@ public class Person {
     }
 
     private boolean isValidString(String inString)throws IllegalArgumentException{
-        if(checkForNumbers(inString)){
-            throw new IllegalArgumentException("numbers not allowed in name");
-        }
         if(inString == null || inString.trim().isEmpty()){
             throw new IllegalArgumentException("not allowed empty String or null");
+        }
+        if(checkForNumbers(inString)){
+            throw new IllegalArgumentException("numbers not allowed in name");
         }
         return  true;
     }
