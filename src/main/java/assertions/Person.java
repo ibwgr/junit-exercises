@@ -28,7 +28,7 @@ public class Person {
         } else if (lastName == null && firstName != null) {
             return firstName;
         } else {
-            return "no name";
+            return NO_NAME;
         }
     }
 
