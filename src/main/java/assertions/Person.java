@@ -13,6 +13,8 @@ public class Person {
     private String firstName = null;
     private String lastName = null;
     private LocalDate birthDate = null;
+    private Pattern p = Pattern.compile("[0-9]");
+
 
     public Person(String firstName, String lastName, LocalDate birthDate) {
         if(isValidString(firstName)){
@@ -27,7 +29,6 @@ public class Person {
     }
 
     private boolean isValidDate(LocalDate date)throws IllegalArgumentException{
-
         if(date == null || date.isAfter(LocalDate.now())){
             throw new IllegalArgumentException("not allowed null or date after actual time for birthDate");
         }
@@ -35,11 +36,17 @@ public class Person {
     }
 
     private boolean isValidString(String inString)throws IllegalArgumentException{
-        if(inString == null || inString.trim().isEmpty()){
-            throw new IllegalArgumentException("not allowed empty String or null");
+        if(inString == null ){
+            throw new IllegalArgumentException("not allowed null for String argument");
+        }
+        if(inString.isEmpty()){
+            throw new IllegalArgumentException("not allowed empty String");
         }
         if(checkForNumbers(inString)){
             throw new IllegalArgumentException("numbers not allowed in name");
+        }
+        if(!(inString.trim().length() > 0)){
+            throw new IllegalArgumentException("not allowed only white spaces");
         }
         return  true;
     }
@@ -53,7 +60,6 @@ public class Person {
     }
 
     private boolean checkForNumbers(String name){
-        Pattern p = Pattern.compile("[0-9]");
         Matcher m = p.matcher(name);
         return m.find();
     }

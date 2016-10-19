@@ -39,21 +39,39 @@ public class PersonTest {
     }
 
     @Test
-    public void newPersonThrowIllegalArgumentExceptionFirstnameOrLastnameEmpty(){
+    public void newPersonThrowIllegalArgumentExceptionFirstnameEmptyString(){
 
         thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("not allowed empty String or null");
+        thrown.expectMessage("not allowed empty String");
 
-        new Person("Hans", "  ", LocalDate.now());
+        new Person("", "Meier", LocalDate.now());
     }
 
     @Test
-    public void newPersonThrowIllegalArgumentExceptionFirstnameOrLastnameNull(){
+    public void newPersonThrowIllegalArgumentExceptionLastnameEmptyString(){
 
         thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("not allowed empty String or null");
+        thrown.expectMessage("not allowed empty String");
+
+        new Person("Hans", "", LocalDate.now());
+    }
+
+    @Test
+    public void newPersonThrowIllegalArgumentExceptionLastnameNull(){
+
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("not allowed null for String argument");
 
         new Person("Hans", null, LocalDate.now());
+    }
+
+    @Test
+    public void newPersonThrowIllegalArgumentExceptionFirstnameNull(){
+
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("not allowed null for String argument");
+
+        new Person(null, "Meier", LocalDate.now());
     }
 
     @Test
@@ -63,6 +81,24 @@ public class PersonTest {
         thrown.expectMessage("numbers not allowed in name");
 
         new Person("Hans", "Meier12", LocalDate.now());
+    }
+
+    @Test
+    public void newPersonThrowIllegalArgumentExceptionFirstnameWhiteSpaces(){
+
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("not allowed only white spaces");
+
+        new Person("  ", "Meier", LocalDate.now());
+    }
+
+    @Test
+    public void newPersonThrowIllegalArgumentExceptionLastnameWhiteSpaces(){
+
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("not allowed only white spaces");
+
+        new Person("Hans", "  ", LocalDate.now());
     }
 
     // getAge
