@@ -2,22 +2,22 @@ package fakes;
 
 public class UserValidator {
 
-    public static boolean isValidUsername(String username){
-        return checkUserNameExistsViaNetwork(username)
-                && checkUserNameIsValid(username);
-    }
+    private static Database db = FileDatabase.getInstance();
 
-    private static boolean checkUserNameExistsViaNetwork(String username){
+    public static boolean doesUsernameExist(String username){
         try {
             Thread.sleep(4000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return false;
+        return db.getUsers().stream()
+                .filter(u ->
+                        u.getUsername().equals(username)
+                )
+                .count() > 0;
     }
 
-
-    private static boolean checkUserNameIsValid(String username){
-        return false;
+    public static boolean isValidUsername(String username){
+        return true;
     }
 }

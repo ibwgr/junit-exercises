@@ -2,15 +2,18 @@ package fakes;
 
 public class UserController {
 
+    private static Database db = FileDatabase.getInstance();
+
     public Message create(User user){
         if(user == null){
-            throw new NullPointerException("User required");
+            throw new IllegalArgumentException("user required");
         }
-        if(UserValidator.isValidUsername(user.getUsername())){
-            System.out.println("Erstelle User ...");
+        Boolean canCreate = UserValidator.isValidUsername(user.getUsername())
+                            && !UserValidator.doesUsernameExist(user.getUsername());
+        if(canCreate){
+            db.addUser(user);
             return Message.createOK();
         }else{
-            System.out.println("User konnte nicht erstellt werden!");
             return Message.createNotOK();
         }
     }
