@@ -41,19 +41,19 @@ public class UserControllerTest {
         // --- Testing Exceptions ---
 
         @Test
-        public void TRY_CATCH_withNullUser_throwsNPE(){
+        public void TRY_CATCH_withNullUser_throwsIllegalArgumentExc(){
             try{
                 UserController ctrl = new UserController();
                 ctrl.create(null);
-                Assert.fail("No NPE was thrown");
-            }catch(NullPointerException ex){
+                Assert.fail("No IllegalArgumentExc was thrown");
+            }catch(IllegalArgumentException ex){
                 // Optional: Test message
-                Assert.assertEquals("User required", ex.getMessage());
+                Assert.assertEquals("user required", ex.getMessage());
             }
         }
 
-        @Test(expected = NullPointerException.class)
-        public void EXPECTED_withNullUser_throwsNPE(){
+        @Test(expected = IllegalArgumentException.class)
+        public void EXPECTED_withNullUser_throwsIllegalArgumentExc(){
             UserController ctrl = new UserController();
             ctrl.create(null);
         }
@@ -63,8 +63,8 @@ public class UserControllerTest {
         public ExpectedException expected = ExpectedException.none();
 
         @Test
-        public void RULE_withNullUser_throwsNPE(){
-            expected.expect(NullPointerException.class);
+        public void RULE_withNullUser_throwsIllegalArgumentExc(){
+            expected.expect(IllegalArgumentException.class);
             // Optional: Test message
             expected.expectMessage(JUnitMatchers.containsString("required"));
 

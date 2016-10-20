@@ -8,7 +8,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 @RunWith(Enclosed.class)
 public class UserValidatorTest {
 
-    public static class isValidUserName{
+    public static class isValidUsername{
 
         @Test
         public void returnsTrueIfOnlyLetters(){
@@ -27,6 +27,19 @@ public class UserValidatorTest {
 
         @Test
         public void returnsFalseIfContainsAnyNonAlphanumericChar(){
+            throw new NotImplementedException();
+        }
+    }
+
+    public static class doesUsernameExist{
+
+        @Test
+        public void returnsTrueIfUsernameNotInDBYet(){
+            throw new NotImplementedException();
+        }
+
+        @Test
+        public void returnsFalseIfUsernameInDB(){
             throw new NotImplementedException();
         }
     }
