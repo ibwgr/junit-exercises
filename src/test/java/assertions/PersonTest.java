@@ -1,5 +1,6 @@
 package assertions;
 
+import org.junit.Assert;
 import org.junit.Test;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -14,29 +15,45 @@ public class PersonTest {
 
     @Test
     public void getFullNameReturnsFirstnameSpaceLastname(){
-        // TODO implement
-        throw new NotImplementedException();
+        Person p = new Person("Firstname", "Lastname", LocalDate.of(2006, 1, 1));
+
+        Assert.assertEquals("Firstname Lastname", p.getFullName());
     }
 
-    // TODO some more useful tests
+    @Test
+    public void getFullNameReturnsSpaceIfEmpty(){
+        Person p = new Person("", "", LocalDate.of(2006, 1, 1));
+
+        Assert.assertEquals(" ", p.getFullName());
+    }
 
     // getAge
 
-
-    // TODO verbessern. Hinweis: Repeatable (wiederholbar) zu jeder Zeit.
     @Test
-    public void getAgeReturns10YearsIf2006() throws Exception {
-        Person p = new Person("", "", LocalDate.of(2006, 1, 1));
+    public void getAgeReturns10YearsIf10YearsAgo() throws Exception {
+        Person p = new Person("", "", LocalDate.now().minusYears(10));
 
-        throw new NotImplementedException();
+        Assert.assertEquals(10, p.getAge().getYears());
+        Assert.assertEquals( 0, p.getAge().getMonths());
+        Assert.assertEquals( 0, p.getAge().getDays());
     }
 
     @Test
     public void getAgeReturns1DayIfYesterday() throws Exception {
         Person p = new Person("", "", LocalDate.now().minusDays(1));
 
-        // TODO implement
-        throw new NotImplementedException();
+        Assert.assertEquals(0, p.getAge().getYears());
+        Assert.assertEquals(0, p.getAge().getMonths());
+        Assert.assertEquals(1, p.getAge().getDays());
     }
-    // TODO some more useful tests
+
+    @Test
+    public void getAgeReturns3MonthIf3MonthAgo() throws Exception {
+        Person p = new Person("", "", LocalDate.now().minusMonths(3));
+
+        Assert.assertEquals(0, p.getAge().getYears());
+        Assert.assertEquals(3, p.getAge().getMonths());
+        Assert.assertEquals(0, p.getAge().getDays());
+    }
+
 }
