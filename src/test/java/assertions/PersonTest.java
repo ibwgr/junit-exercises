@@ -43,11 +43,21 @@ public class PersonTest {
 
     // TODO verbessern. Hinweis: Repeatable (wiederholbar) zu jeder Zeit.
     @Test
-    public void getAgeReturns10YearsIf2006() throws Exception {
-        Person p = new Person("", "", LocalDate.of(2006, 1, 1));
+    public void getAgeReturns10YearsIf2006() throws Exception{
+        Person p = new Person("", "", LocalDate.of(2006, 1, 1));}
 
+        public void getAgeGibtImmer10JahreZurueck(){
+            Person p = new Person("Harry", "Moser", LocalDate.of(2006,1,1));
 
+            Period alter = p.getAge();
+
+            Assert.assertEquals(1,alter.getYears());
     }
+
+
+
+
+
 
     @Test
     public void getAgeReturns1DayIfYesterday() throws Exception {
