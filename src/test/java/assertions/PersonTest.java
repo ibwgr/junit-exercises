@@ -2,7 +2,6 @@ package assertions;
 
 import junit.framework.Assert;
 import org.junit.Test;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -12,7 +11,7 @@ import java.time.Period;
  */
 public class PersonTest {
 
-    // getFullName
+
 
     @Test
     public void getFullNameReturnsFirstnameSpaceLastname(){
@@ -27,44 +26,41 @@ public class PersonTest {
     @Test
     public void getAgeReturnTestObObjektPeriodeZurckKommt(){
         Person t = new Person("Harry", "Moser", LocalDate.now());
+
         Period  period = t.getAge();
+
         Assert.assertNotNull(period);
 
     }
     @Test
     public void getAgeRetunObAlterRichtigRechnet() {
         Person p = new Person("Harry", "Moser", LocalDate.of(1973, 04, 10));
+
         Period  period = p.getAge();
+
         Assert.assertEquals(43,period.getYears());
-
-
-
     }
 
     // TODO verbessern. Hinweis: Repeatable (wiederholbar) zu jeder Zeit.
     @Test
-    public void getAgeReturns10YearsIf2006() throws Exception{
-        Person p = new Person("", "", LocalDate.of(2006, 1, 1));}
+    public void getAgeGibtImmer10JahreZurueck() {
 
-        public void getAgeGibtImmer10JahreZurueck(){
-            Person p = new Person("Harry", "Moser", LocalDate.of(2006,1,1));
+        Person p = new Person("Harry", "Moser", LocalDate.now().minusYears(10));
 
-            Period alter = p.getAge();
+        Period alter = p.getAge();
 
-            Assert.assertEquals(1,alter.getYears());
+        Assert.assertEquals(10, alter.getYears());
+
     }
-
-
-
-
-
 
     @Test
     public void getAgeReturns1DayIfYesterday() throws Exception {
-        Person p = new Person("", "", LocalDate.now().minusDays(1));
 
-        // TODO implement
-        throw new NotImplementedException();
+        Person p = new Person("Harry", "Moser", LocalDate.now().minusDays(1));
+
+        Period age = p.getAge();
+
+        Assert.assertEquals(1,age.getDays());
     }
-    // TODO some more useful tests
+
 }
