@@ -10,6 +10,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import static org.mockito.Mockito.*;
+
 // @RunWith wird gebraucht, damit mit inner classes gearbeitet werden kann
 @RunWith(Enclosed.class)
 public class UserControllerTest {
@@ -35,6 +37,36 @@ public class UserControllerTest {
             // 1. Test schneller machen
             // 2. UserController.create so beinflussen,
             //      dass einmal der "if"- und einmal der "else"-Fall durchlaufen wird
+
+            UserValidator userValidator = mock(UserValidator.class);
+
+            when(userValidator.isValidUsername(anyString())).thenReturn(true);
+            when(userValidator.doesUsernameExist(anyString())).thenReturn(false);
+
+
+            UserController ctrl = new UserController(userValidator);
+            User user = new User("kalua");
+
+            Message result = ctrl.create(user);
+
+            Assert.assertEquals(Message.Status.OK, result.status);
+        }
+
+        @Test
+        public void FAKE_DB_withValidInexistingUsername_addsUserToDB(){
+            UserValidator userValidator = mock(UserValidator.class);
+
+            when(userValidator.isValidUsername(anyString())).thenReturn(true);
+            when(userValidator.doesUsernameExist(anyString())).thenReturn(false);
+
+            Database db = mock(Database.class);
+
+            UserController ctrl = new UserController(userValidator, db);
+            ctrl.create(new User("h"));
+
+            //Assert.assertTrue(db.getUsers().hasBeenCalledOnce());
+            verify(db, times(1)).addUser(any(User.class));
+
         }
 
 
@@ -57,7 +89,6 @@ public class UserControllerTest {
             UserController ctrl = new UserController();
             ctrl.create(null);
         }
-
 
         @Rule
         public ExpectedException expected = ExpectedException.none();
