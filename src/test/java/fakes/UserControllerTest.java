@@ -21,7 +21,8 @@ public class UserControllerTest {
 
         @Test
         public void NO_FAKE_withValidInexistingUsername_returnsOK(){
-            UserController ctrl = new UserController();
+            UserValidator userValidator = new FakeUserValidator();
+            UserController ctrl = new UserController(userValidator);
             User user = new User("kalua");
 
             Message result = ctrl.create(user);
@@ -35,6 +36,35 @@ public class UserControllerTest {
             // 1. Test schneller machen
             // 2. UserController.create so beinflussen,
             //      dass einmal der "if"- und einmal der "else"-Fall durchlaufen wird
+            UserValidator userValidator = Mockito.mock(UserValidator.class);
+
+            Mockito.when(userValidator.isValidUsername(Mockito.anyString())).thenReturn(true);
+            Mockito.when(userValidator.doesUsernameExist(Mockito.anyString())).thenReturn(false);
+
+            UserController ctrl = new UserController(userValidator);
+            User user = new User("kalua");
+
+            Message result = ctrl.create(user);
+
+            Assert.assertEquals(result.status, Message.Status.OK);
+        }
+
+        @Test
+        public void FAKE_DB_withValidInexitingUserName_addUserToDB(){
+
+            UserValidator userValidator = Mockito.mock(UserValidator.class);
+
+            Mockito.when(userValidator.isValidUsername(Mockito.anyString())).thenReturn(true);
+            Mockito.when(userValidator.doesUsernameExist(Mockito.anyString())).thenReturn(false);
+
+            Database db = Mockito.mock(Database.class);
+
+            UserController ctrl = new UserController(db,userValidator);
+            User user = new User("kalua");
+            ctrl.create(user);
+
+            Mockito.verify(db, Mockito.times(1)).addUser(Mockito.any(User.class));
+
         }
 
 

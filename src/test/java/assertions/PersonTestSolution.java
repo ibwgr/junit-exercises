@@ -15,7 +15,7 @@ public class PersonTestSolution {
 
     @Test
     public void getFullNameReturnsFirstnameSpaceLastname(){
-        Person p = new Person("Hannes", "Meier", null);
+        Person p = new Person("Hannes", "Meier", LocalDate.of(1965,5,22));
 
         String fullName = p.getFullName();
 
@@ -26,7 +26,7 @@ public class PersonTestSolution {
 
     @Test
     public void getAgeReturns10YearsIf10YearsAgo() throws Exception {
-        Person p = new Person("", "", LocalDate.now().minusYears(10));
+        Person p = new Person("Hannes", "Meier", LocalDate.now().minusYears(10));
 
         Period age = p.getAge();
 
@@ -37,7 +37,7 @@ public class PersonTestSolution {
 
     @Test
     public void getAgeReturns1DayIfYesterday() throws Exception {
-        Person p = new Person("", "", LocalDate.now().minusDays(1));
+        Person p = new Person("Hannes", "Meier", LocalDate.now().minusDays(1));
 
         Period age = p.getAge();
 
