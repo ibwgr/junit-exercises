@@ -23,18 +23,20 @@ public class UserControllerTest {
 
         @Test
         public void NO_FAKE_withValidInexistingUsername_returnsOK(){
+            // Dieser Test ist nicht wiederholbar.
+            // Beim zweiten Durchlauf schlägt er fehl, weil dann der Benutzer bereits in der Datenbank existiert
+            // Dieser Test ist langsam, weil er von der langsamen Datenbank abhängig ist.
             UserController ctrl = new UserController();
             User user = new User("kalua");
 
             Message result = ctrl.create(user);
 
-            Assert.assertEquals(result.status, Message.Status.OK);
+            Assert.assertEquals(Message.Status.OK, result.status);
         }
 
         @Test
         public void MOCKITO_FAKE_withValidInexistingUsername_returnsOK(){
-            // TODO
-            // 1. Test schneller machen
+            // 1. Test schneller & wiederholbar machen
             // 2. UserController.create so beinflussen,
             //      dass einmal der "if"- und einmal der "else"-Fall durchlaufen wird
 
@@ -64,9 +66,7 @@ public class UserControllerTest {
             UserController ctrl = new UserController(userValidator, db);
             ctrl.create(new User("h"));
 
-            //Assert.assertTrue(db.getUsers().hasBeenCalledOnce());
             verify(db, times(1)).addUser(any(User.class));
-
         }
 
 
