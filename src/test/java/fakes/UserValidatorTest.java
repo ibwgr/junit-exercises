@@ -30,4 +30,25 @@ public class UserValidatorTest {
             throw new NotImplementedException();
         }
     }
+
+    public static class doesUsernameExist{
+
+        @Test
+        public void returnsTrueNotInDBYet(){
+            throw new NotImplementedException();
+        }
+
+        // Zu Deutsch:
+        // returnsFalse_Falls_gleicherBenutzernameBereitsInDatenbank_AberMitUnterschiedlicherGrossKleinSchreibung
+        @Test
+        public void returnsFalseIfSameNameInDBButWithDifferentLetterCasing(){
+            throw new NotImplementedException();
+        }
+
+
+        @Test
+        public void returnsFalseIfAlreadyInDB(){
+            throw new NotImplementedException();
+        }
+    }
 }
