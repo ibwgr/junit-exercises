@@ -68,6 +68,9 @@ public class UserControllerTest {
         }
 
 
+        }
+
+
         // --- Testing Exceptions ---
 
         @Test
@@ -87,7 +90,6 @@ public class UserControllerTest {
             UserController ctrl = new UserController();
             ctrl.create(null);
         }
-
 
         @Rule
         public ExpectedException expected = ExpectedException.none();

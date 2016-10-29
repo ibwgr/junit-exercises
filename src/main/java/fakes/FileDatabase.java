@@ -38,7 +38,6 @@ public class FileDatabase extends Database {
 
     @Override
     public void addUser(User user) {
-
         List<User> users = this.getUsers();
         users.add(user);
         try {
