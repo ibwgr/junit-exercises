@@ -2,6 +2,7 @@ package fakes;
 
 import org.mockito.Mockito;
 
+public class FakeUserValidator extends UserValidator{
     public boolean doesUsernameExist(String username){
         return false;
     }

@@ -15,12 +15,12 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 public class UserControllerTest {
 
     // Pro getestete Methode gibt es eine inner class (Hier für UserController.create)
-    public static class create{
+    public static class create {
 
         // --- Testing with Fakes ---
 
         @Test
-        public void NO_FAKE_withValidInexistingUsername_returnsOK(){
+        public void NO_FAKE_withValidInexistingUsername_returnsOK() {
             UserValidator userValidator = new FakeUserValidator();
             UserController ctrl = new UserController(userValidator);
             User user = new User("kalua");
@@ -31,7 +31,7 @@ public class UserControllerTest {
         }
 
         @Test
-        public void MOCKITO_FAKE_withValidInexistingUsername_returnsOK(){
+        public void MOCKITO_FAKE_withValidInexistingUsername_returnsOK() {
             // TODO
             // 1. Test schneller machen
             // 2. UserController.create so beinflussen,
@@ -50,7 +50,7 @@ public class UserControllerTest {
         }
 
         @Test
-        public void FAKE_DB_withValidInexitingUserName_addUserToDB(){
+        public void FAKE_DB_withValidInexitingUserName_addUserToDB() {
 
             UserValidator userValidator = Mockito.mock(UserValidator.class);
 
@@ -59,7 +59,7 @@ public class UserControllerTest {
 
             Database db = Mockito.mock(Database.class);
 
-            UserController ctrl = new UserController(db,userValidator);
+            UserController ctrl = new UserController(db, userValidator);
             User user = new User("kalua");
             ctrl.create(user);
 
@@ -68,40 +68,38 @@ public class UserControllerTest {
         }
 
 
-        }
+    // --- Testing Exceptions ---
 
-
-        // --- Testing Exceptions ---
-
-        @Test
-        public void TRY_CATCH_withNullUser_throwsIllegalArgumentExc(){
-            try{
-                UserController ctrl = new UserController();
-                ctrl.create(null);
-                Assert.fail("No IllegalArgumentExc was thrown");
-            }catch(IllegalArgumentException ex){
-                // Optional: Test message
-                Assert.assertEquals("user required", ex.getMessage());
-            }
-        }
-
-        @Test(expected = IllegalArgumentException.class)
-        public void EXPECTED_withNullUser_throwsIllegalArgumentExc(){
+    @Test
+    public void TRY_CATCH_withNullUser_throwsIllegalArgumentExc() {
+        try {
             UserController ctrl = new UserController();
             ctrl.create(null);
-        }
-
-        @Rule
-        public ExpectedException expected = ExpectedException.none();
-
-        @Test
-        public void RULE_withNullUser_throwsIllegalArgumentExc(){
-            expected.expect(IllegalArgumentException.class);
+            Assert.fail("No IllegalArgumentExc was thrown");
+        } catch (IllegalArgumentException ex) {
             // Optional: Test message
-            expected.expectMessage(JUnitMatchers.containsString("required"));
-
-            UserController ctrl = new UserController();
-            ctrl.create(null);
+            Assert.assertEquals("user required", ex.getMessage());
         }
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void EXPECTED_withNullUser_throwsIllegalArgumentExc() {
+        UserController ctrl = new UserController();
+        ctrl.create(null);
+    }
+
+    @Rule
+    public ExpectedException expected = ExpectedException.none();
+
+    @Test
+    public void RULE_withNullUser_throwsIllegalArgumentExc() {
+        expected.expect(IllegalArgumentException.class);
+        // Optional: Test message
+        expected.expectMessage(JUnitMatchers.containsString("required"));
+
+        UserController ctrl = new UserController();
+        ctrl.create(null);
+    }
+
+}
 }
