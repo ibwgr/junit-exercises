@@ -12,7 +12,7 @@ public class UserValidator {
 
     public boolean doesUsernameExist(String username){
         try {
-            Thread.sleep(4000);
+            Thread.sleep(100);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
