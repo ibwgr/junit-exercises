@@ -38,7 +38,7 @@ public class UserValidatorTest {
             throw new NotImplementedException();
         }
 
-        // Zu Deutsch:
+        // Auf Deutsch:
         // returnsFalse_Falls_gleicherBenutzernameBereitsInDatenbank_AberMitUnterschiedlicherGrossKleinSchreibung
         @Test
         public void returnsFalseIfSameNameInDBButWithDifferentLetterCasing(){
