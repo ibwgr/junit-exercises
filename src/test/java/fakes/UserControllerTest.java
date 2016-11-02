@@ -8,7 +8,6 @@ import org.junit.matchers.JUnitMatchers;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 // @RunWith wird gebraucht, damit mit inner classes gearbeitet werden kann
 @RunWith(Enclosed.class)
@@ -46,7 +45,7 @@ public class UserControllerTest {
 
             Message result = ctrl.create(user);
 
-            Assert.assertEquals(result.status, Message.Status.OK);
+            Assert.assertEquals(Message.Status.OK, result.status);
         }
 
         @Test

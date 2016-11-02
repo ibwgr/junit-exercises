@@ -4,12 +4,12 @@ import junit.framework.Assert;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static fakes.Rule.*;
 
 @RunWith(Enclosed.class)
 public class UserValidatorTest {
@@ -20,24 +20,39 @@ public class UserValidatorTest {
         public void returnsTrueIfOnlyLetters(){
             UserValidator userValidator = new UserValidator();
 
-            boolean valid = userValidator.isValidUsername("Hans");
+            boolean valid = userValidator.isValidUsername("Hans",LETTERS_SONLY);
 
             Assert.assertTrue(valid);
         }
 
         @Test
         public void returnsFalseIfStartsWithNumber(){
-            throw new NotImplementedException();
+
+            UserValidator userValidator = new UserValidator();
+
+            boolean valid = userValidator.isValidUsername("1Hans", START_WITH_NUMBER);
+
+            Assert.assertFalse(valid);
         }
 
         @Test
         public void returnsTrueIfContainsNumberButNotAsFirstChar(){
-            throw new NotImplementedException();
+
+            UserValidator userValidator = new UserValidator();
+
+            boolean valid = userValidator.isValidUsername("Hans1", NUMBER_NOT_FIRST_CHAR);
+
+            Assert.assertTrue(valid);
         }
 
         @Test
         public void returnsFalseIfContainsAnyNonAlphanumericChar(){
-            throw new NotImplementedException();
+
+            UserValidator userValidator = new UserValidator();
+
+            boolean valid = userValidator.isValidUsername("Hans-Peter", ALPHANUMERIC);
+
+            Assert.assertFalse(valid);
         }
     }
 
@@ -64,7 +79,7 @@ public class UserValidatorTest {
         @Test
         public void FakeDb_ReturnsFalseNotInDBYet(){
 
-            Database db = FakeFileDatabase.getInstance();
+            Database db = new FakeFileDatabase();
             UserValidator userValidator = new UserValidator(db);
             db.addUser(new User("Peter"));
 
@@ -78,7 +93,7 @@ public class UserValidatorTest {
         @Test
         public void returnsTrueIfSameNameInDBButWithDifferentLetterCasing(){
 
-            Database db = FakeFileDatabase.getInstance();
+            Database db = new FakeFileDatabase();
             UserValidator userValidator = new UserValidator(db);
             db.addUser(new User("hans"));
 
@@ -91,7 +106,7 @@ public class UserValidatorTest {
         @Test
         public void returnsTrueIfAlreadyInDB(){
 
-            Database db = FakeFileDatabase.getInstance();
+            Database db = new FakeFileDatabase();
             UserValidator userValidator = new UserValidator(db);
             db.addUser(new User("Hans"));
 

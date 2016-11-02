@@ -11,13 +11,6 @@ public class FakeFileDatabase extends Database {
     public static FakeFileDatabase instance;
     private List<User> users = null;
 
-    public static Database getInstance(){
-        if(instance == null){
-            instance = new FakeFileDatabase();
-        }
-        return instance;
-    }
-
     public FakeFileDatabase(){
         users = new ArrayList<User>();
     }
