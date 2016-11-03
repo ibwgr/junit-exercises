@@ -30,25 +30,21 @@ public class UserValidator {
 
     public boolean isValidUsername(String username){
 
-        return true;
-    }
-
-    public boolean isValidUsername(String username, Rule rule){
-
-        switch(rule){
-            case LETTERS_SONLY:
-                return checkForLettersOnly(username);
-            case ALPHANUMERIC:
-                return !containsNonAlphanumericChar(username);
-            case START_WITH_NUMBER:
-                return !Character.isDigit(username.charAt(0));
-            case NUMBER_NOT_FIRST_CHAR:
-                return containsNumberButNotAsFirstChar(username);
-                default:
-                    return  false;
+        if(containsNonAlphanumericChar(username)){
+            return false;
         }
-
+        if(Character.isDigit(username.charAt(0))){
+            return false;
+        }
+        if(checkForLettersOnly(username)){
+            return true;
+        }
+        if(containsNumberButNotAsFirstChar(username)){
+            return true;
+        }
+        return false;
     }
+
 
     private boolean checkForLettersOnly(String name){
         Matcher m = p.matcher(name);
@@ -61,7 +57,7 @@ public class UserValidator {
 
         if (name != null && !name.isEmpty()) {
             for (char c : name.toCharArray()) {
-                if (!Character.isDigit(c) && !Character.isAlphabetic(c)) {
+                if (!Character.isLetterOrDigit(c)) {
                     noAlphanumeric = true;
                     break;
                 }
@@ -76,8 +72,8 @@ public class UserValidator {
             if(Character.isDigit(name.charAt(0))){
                 return false;
             }
-            String shortName = name.substring(1, name.length());
 
+            String shortName = name.substring(1, name.length());
             for (char c : shortName.toCharArray()){
                if(Character.isDigit(c)){
                    return  true;

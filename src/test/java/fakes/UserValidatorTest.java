@@ -9,7 +9,6 @@ import org.mockito.Mockito;
 import java.util.ArrayList;
 import java.util.List;
 
-import static fakes.Rule.*;
 
 @RunWith(Enclosed.class)
 public class UserValidatorTest {
@@ -20,7 +19,7 @@ public class UserValidatorTest {
         public void returnsTrueIfOnlyLetters(){
             UserValidator userValidator = new UserValidator();
 
-            boolean valid = userValidator.isValidUsername("Hans",LETTERS_SONLY);
+            boolean valid = userValidator.isValidUsername("Hans");
 
             Assert.assertTrue(valid);
         }
@@ -30,7 +29,7 @@ public class UserValidatorTest {
 
             UserValidator userValidator = new UserValidator();
 
-            boolean valid = userValidator.isValidUsername("1Hans", START_WITH_NUMBER);
+            boolean valid = userValidator.isValidUsername("1Hans");
 
             Assert.assertFalse(valid);
         }
@@ -40,7 +39,7 @@ public class UserValidatorTest {
 
             UserValidator userValidator = new UserValidator();
 
-            boolean valid = userValidator.isValidUsername("Hans1", NUMBER_NOT_FIRST_CHAR);
+            boolean valid = userValidator.isValidUsername("Hans1");
 
             Assert.assertTrue(valid);
         }
@@ -50,7 +49,7 @@ public class UserValidatorTest {
 
             UserValidator userValidator = new UserValidator();
 
-            boolean valid = userValidator.isValidUsername("Hans-Peter", ALPHANUMERIC);
+            boolean valid = userValidator.isValidUsername("Hans-Peter");
 
             Assert.assertFalse(valid);
         }
