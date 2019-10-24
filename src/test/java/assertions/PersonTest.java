@@ -1,19 +1,16 @@
 package assertions;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.time.LocalDate;
 
-/**
- * Created by ideadapt on 09.10.16.
- */
-public class PersonTest {
+class PersonTest {
 
     // getFullName
 
     @Test
-    public void getFullNameReturnsFirstnameSpaceLastname(){
+    void getFullNameReturnsFirstnameSpaceLastname(){
         // TODO implement
         throw new NotImplementedException();
     }
@@ -25,14 +22,14 @@ public class PersonTest {
 
     // TODO verbessern. Hinweis: Repeatable (wiederholbar) zu jeder Zeit.
     @Test
-    public void getAgeReturns10YearsIf2006() throws Exception {
+    void getAgeReturns10YearsIf2006() throws Exception {
         Person p = new Person("", "", LocalDate.of(2006, 1, 1));
 
         throw new NotImplementedException();
     }
 
     @Test
-    public void getAgeReturns1DayIfYesterday() throws Exception {
+    void getAgeReturns1DayIfYesterday() throws Exception {
         Person p = new Person("", "", LocalDate.now().minusDays(1));
 
         // TODO implement

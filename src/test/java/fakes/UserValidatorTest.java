@@ -1,45 +1,44 @@
 package fakes;
 
-import org.junit.Test;
-import org.junit.experimental.runners.Enclosed;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-@RunWith(Enclosed.class)
-public class UserValidatorTest {
+class UserValidatorTest {
 
-    public static class isValidUsername{
+    @Nested
+    class isValidUsername{
 
         @Test
-        public void returnsTrueIfOnlyLetters(){
+        void returnsTrueIfOnlyLetters(){
             throw new NotImplementedException();
         }
 
         @Test
-        public void returnsFalseIfStartsWithNumber(){
+        void returnsFalseIfStartsWithNumber(){
             throw new NotImplementedException();
         }
 
         @Test
-        public void returnsTrueIfContainsNumberButNotAsFirstChar(){
+        void returnsTrueIfContainsNumberButNotAsFirstChar(){
             throw new NotImplementedException();
         }
 
         @Test
-        public void returnsFalseIfContainsAnyNonAlphanumericChar(){
+        void returnsFalseIfContainsAnyNonAlphanumericChar(){
             throw new NotImplementedException();
         }
     }
 
-    public static class doesUsernameExist{
+    static class doesUsernameExist{
 
         @Test
-        public void returnsTrueIfUsernameNotInDBYet(){
+        void returnsTrueIfUsernameNotInDBYet(){
             throw new NotImplementedException();
         }
 
         @Test
-        public void returnsFalseIfUsernameInDB(){
+        void returnsFalseIfUsernameInDB(){
             throw new NotImplementedException();
         }
     }

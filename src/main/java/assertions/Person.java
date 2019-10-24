@@ -3,9 +3,6 @@ package assertions;
 import java.time.LocalDate;
 import java.time.Period;
 
-/**
- * Created by ideadapt on 09.10.16.
- */
 public class Person {
 
     private final String firstName;
