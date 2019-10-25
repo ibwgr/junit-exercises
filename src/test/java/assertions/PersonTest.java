@@ -22,8 +22,8 @@ class PersonTest {
 
     // TODO verbessern. Hinweis: Repeatable (wiederholbar) zu jeder Zeit.
     @Test
-    void getAgeReturns10YearsIf2006() throws Exception {
-        Person p = new Person("", "", LocalDate.of(2006, 1, 1));
+    void getAgeReturns10YearsIfBornIn2009() throws Exception {
+        Person p = new Person("", "", LocalDate.of(2009, 1, 1));
 
         throw new NotImplementedException();
     }
