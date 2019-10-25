@@ -13,22 +13,17 @@ class PersonTest {
     @Test
     void getFullNameReturnsFirstnameSpaceLastname(){
         // TODO implement
-        Person p = new Person("Rade", "Ilic", LocalDate.of(1992, 3, 9));
+        Person p = new Person("Hannes", "Meier", LocalDate.of(1992, 3, 9));
 
         String fullName = p.getFullName();
 
         Assertions.assertEquals(fullName, "Hannes Meier");
     }
 
-    // TODO some more useful tests
-
     // getAge
-
-
-    // TODO verbessern. Hinweis: Repeatable (wiederholbar) zu jeder Zeit.
     @Test
-    void getAgeReturns10YearsIfBornIn2009() throws Exception {
-        Person p = new Person("", "", LocalDate.now().minusYears(10));
+    void getAgeReturns10YearsIf10YearsAgo(){
+        Person p = new Person("Hannes", "Meier", LocalDate.now().minusYears(10));
 
         Period age = p.getAge();
 
@@ -38,8 +33,8 @@ class PersonTest {
     }
 
     @Test
-    void getAgeReturns1DayIfYesterday() throws Exception {
-         Person p = new Person("", "", LocalDate.now().minusDays(1));
+    void getAgeReturns1DayIfYesterday(){
+        Person p = new Person("Hannes", "Meier", LocalDate.now().minusDays(1));
 
         Period age = p.getAge();
 
@@ -47,5 +42,5 @@ class PersonTest {
         Assertions.assertEquals(0, age.getMonths());
         Assertions.assertEquals(1, age.getDays());
     }
-    // TODO some more useful tests
 }
+    // TODO some more useful tests
