@@ -1,5 +1,6 @@
 package assertions;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -12,7 +13,11 @@ class PersonTest {
     @Test
     void getFullNameReturnsFirstnameSpaceLastname(){
         // TODO implement
-        throw new NotImplementedException();
+        Person p = new Person("Rade", "Ilic", -03-1992);
+
+        String fullName = p.getFullName();
+
+        Assertions.assertEquals(fullName, "Hannes Meier");
     }
 
     // TODO some more useful tests
