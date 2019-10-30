@@ -1,5 +1,6 @@
 package assertions;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -19,7 +20,19 @@ public class Person {
         return firstName + " " + lastName;
     }
 
+
     public Period getAge(){
         return Period.between(birthDate, LocalDate.now());
     }
-}
+
+
+    public static void main (String[] args){
+
+        try {
+        Person p1 = new Person ("Hans", "Müller", LocalDate.of(1984,8,4));
+        System.out.println(p1.getAge());
+    }
+        catch (DateTimeException e){
+            System.out.println("Keine Null erlaubt");
+        }
+}}
