@@ -1,39 +1,49 @@
 package assertions;
 
+import com.sun.xml.internal.ws.policy.AssertionSet;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 class PersonTest {
 
-    // getFullName
 
     @Test
     void getFullNameReturnsFirstnameSpaceLastname(){
-        // TODO implement
-        throw new NotImplementedException();
+
+        Person p = new Person("Hans", "Müller", null);
+        String fullname = p.getFullName();
+        Assertions.assertEquals(fullname, "Hans Müller");
     }
 
-    // TODO some more useful tests
-
-    // getAge
-
-
-    // TODO verbessern. Hinweis: Repeatable (wiederholbar) zu jeder Zeit.
     @Test
-    void getAgeReturns10YearsIfBornIn2009() throws Exception {
-        Person p = new Person("", "", LocalDate.of(2009, 1, 1));
+    void getAgeReturned10Years() throws Exception{
 
-        throw new NotImplementedException();
+        Person p1 = new Person ("", "", LocalDate.now().minusYears(10));
+        Period age = p1.getAge();
+        Assertions.assertEquals(10, age.getYears());
+        Assertions.assertEquals(0, age.getMonths());
+        Assertions.assertEquals(0, age.getDays());
     }
 
     @Test
     void getAgeReturns1DayIfYesterday() throws Exception {
         Person p = new Person("", "", LocalDate.now().minusDays(1));
-
-        // TODO implement
-        throw new NotImplementedException();
+        Period age = p.getAge();
+        Assertions.assertEquals(0, age.getYears());
+        Assertions.assertEquals(0, age.getMonths());
+        Assertions.assertEquals(1, age.getDays());
     }
-    // TODO some more useful tests
+
+    @Test
+    void getAgeReturs3Month(){
+        Person p2 = new Person("", "", LocalDate.now().minusMonths(3));
+        Period age = p2.getAge();
+        Assertions.assertEquals(0, age.getYears());
+        Assertions.assertEquals(3, age.getMonths());
+        Assertions.assertEquals(0, age.getDays());
+    }
 }
