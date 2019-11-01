@@ -22,4 +22,9 @@ public class Person {
     public Period getAge(){
         return Period.between(birthDate, LocalDate.now());
     }
+
+    public String getAgeToString() {
+        Period p = getAge();
+        return "Age: " + p.getYears() + " Years, " + p.getMonths() + " Months, " + p.getDays() + " Days.";
+    }
 }

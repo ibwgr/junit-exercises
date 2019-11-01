@@ -19,29 +19,20 @@ class PersonTest {
     }
 
     @Test
-    void getAgeReturnsAgeInYears() {
-        Person p1 = new Person("Gion", "Baptista", LocalDate.of(1987, 8,7));
-        Period age = p1.getAge();
-
-        Assertions.assertEquals(32, age.getYears());
-        Assertions.assertEquals(2, age.getMonths());
-        Assertions.assertEquals(22,age.getDays());
-    }
-
-    @Test
-    void getAgeReturns10YearsIfBornIn2009() throws Exception {
-        Person p = new Person("", "",LocalDate.now().minusYears(10));
+    void getAgeReturns10YearsIfBorn10y5m12dAgo() {
+        Person p = new Person("", "",LocalDate.now().minusYears(10).minusMonths(5).minusDays(12));
 
         Period age = p.getAge();
+        System.out.println(age);
 
         Assertions.assertEquals(10, age.getYears());
-        Assertions.assertEquals(0, age.getMonths());
-        Assertions.assertEquals(0,age.getDays());
+        Assertions.assertEquals(5, age.getMonths());
+        Assertions.assertEquals(12,age.getDays());
 
     }
 
     @Test
-    void getAgeReturns1DayIfYesterday() throws Exception {
+    void getAgeReturns1DayIfYesterday() {
         Person p = new Person("", "", LocalDate.now().minusDays(1));
 
         Period age = p.getAge();
@@ -49,6 +40,14 @@ class PersonTest {
         Assertions.assertEquals(0, age.getYears());
         Assertions.assertEquals(0, age.getMonths());
         Assertions.assertEquals(1,age.getDays());
+    }
+
+    @Test
+    void getAgeToStringReturnsAgeAsString() {
+        Person p = new Person("", "",LocalDate.now().minusYears(10).minusMonths(5).minusDays(12));
+        System.out.println(p.getAgeToString());
+
+        Assertions.assertEquals("Age: 10 Years, 5 Months, 12 Days.", p.getAgeToString());
     }
 
 }
