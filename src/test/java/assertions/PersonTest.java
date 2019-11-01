@@ -1,9 +1,10 @@
 package assertions;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 class PersonTest {
 
@@ -11,29 +12,42 @@ class PersonTest {
 
     @Test
     void getFullNameReturnsFirstnameSpaceLastname(){
-        // TODO implement
-        throw new NotImplementedException();
-    }
+        Person p1 = new Person("Gion", "Baptista", LocalDate.of(1987, 1,1));
+        String fullName = p1.getFullName();
 
-    // TODO some more useful tests
-
-    // getAge
-
-
-    // TODO verbessern. Hinweis: Repeatable (wiederholbar) zu jeder Zeit.
-    @Test
-    void getAgeReturns10YearsIfBornIn2009() throws Exception {
-        Person p = new Person("", "", LocalDate.of(2009, 1, 1));
-
-        throw new NotImplementedException();
+        Assertions.assertEquals(fullName, "Gion Baptista");
     }
 
     @Test
-    void getAgeReturns1DayIfYesterday() throws Exception {
+    void getAgeReturns10YearsIfBorn10y5m12dAgo() {
+        Person p = new Person("", "",LocalDate.now().minusYears(10).minusMonths(5).minusDays(12));
+
+        Period age = p.getAge();
+        System.out.println(age);
+
+        Assertions.assertEquals(10, age.getYears());
+        Assertions.assertEquals(5, age.getMonths());
+        Assertions.assertEquals(12,age.getDays());
+
+    }
+
+    @Test
+    void getAgeReturns1DayIfYesterday() {
         Person p = new Person("", "", LocalDate.now().minusDays(1));
 
-        // TODO implement
-        throw new NotImplementedException();
+        Period age = p.getAge();
+
+        Assertions.assertEquals(0, age.getYears());
+        Assertions.assertEquals(0, age.getMonths());
+        Assertions.assertEquals(1,age.getDays());
     }
-    // TODO some more useful tests
+
+    @Test
+    void getAgeToStringReturnsAgeAsString() {
+        Person p = new Person("", "",LocalDate.now().minusYears(10).minusMonths(5).minusDays(12));
+        System.out.println(p.getAgeToString());
+
+        Assertions.assertEquals("Age: 10 Years, 5 Months, 12 Days.", p.getAgeToString());
+    }
+
 }
