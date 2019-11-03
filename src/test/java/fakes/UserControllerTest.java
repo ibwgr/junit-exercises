@@ -38,7 +38,7 @@ class UserControllerTest {
             try{
                 UserController ctrl = new UserController();
                 ctrl.create(null);
-                Assertions.fail("No IllegalArgumentExc was thrown");
+                Assertions.fail("No IllegalArgumentException was thrown");
             }catch(IllegalArgumentException ex){
                 // Optional: Test message
                 Assertions.assertEquals("user required", ex.getMessage());
@@ -46,7 +46,7 @@ class UserControllerTest {
         }
 
         @Test
-        void THROWN_withNullUser_throwsIllegalArgumentExc(){
+        void THROWN_withNullUser_throwsIllegalArgumentException(){
             Assertions.assertThrows(IllegalArgumentException.class, () -> {
                 UserController ctrl = new UserController();
                 ctrl.create(null);
@@ -54,7 +54,7 @@ class UserControllerTest {
         }
 
         @Test
-        void THROWN_MESSAGE_withNullUser_throwsIllegalArgumentExc(){
+        void THROWN_MESSAGE_withNullUser_throwsIllegalArgumentExceptionWithMessage(){
             Exception thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> {
                 UserController ctrl = new UserController();
                 ctrl.create(null);
