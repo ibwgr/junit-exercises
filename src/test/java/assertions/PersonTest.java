@@ -1,7 +1,6 @@
 package assertions;
 
 import org.junit.jupiter.api.Test;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.time.LocalDate;
 
@@ -12,7 +11,7 @@ class PersonTest {
     @Test
     void getFullNameReturnsFirstnameSpaceLastname(){
         // TODO implement
-        throw new NotImplementedException();
+        throw new IllegalArgumentException("you should implement code here");
     }
 
     // TODO some more useful tests
@@ -25,7 +24,7 @@ class PersonTest {
     void getAgeReturns10YearsIfBornIn2009() throws Exception {
         Person p = new Person("", "", LocalDate.of(2009, 1, 1));
 
-        throw new NotImplementedException();
+        throw new IllegalArgumentException("you should implement code here");
     }
 
     @Test
@@ -33,7 +32,7 @@ class PersonTest {
         Person p = new Person("", "", LocalDate.now().minusDays(1));
 
         // TODO implement
-        throw new NotImplementedException();
+        throw new IllegalArgumentException("you should implement code here");
     }
     // TODO some more useful tests
 }
