@@ -2,15 +2,13 @@ package fakes;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.*;
-import java.util.ArrayList;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/**
- * Created by ideadapt on 19.10.16.
- */
 public class FileDatabase extends Database {
 
     public static FileDatabase instance;
