@@ -27,7 +27,7 @@ class UserControllerTest {
             // TODO
             // 1. Test schneller machen
             // 2. UserController.create so beinflussen,
-            //      dass einmal der "if"- und einmal der "else"-Fall durchlaufen wird
+            //    dass einmal der "if"- und einmal der "else"-Fall durchlaufen wird
         }
 
 
@@ -46,7 +46,7 @@ class UserControllerTest {
         }
 
         @Test
-        void EXPECTED_withNullUser_throwsIllegalArgumentExc(){
+        void THROWN_withNullUser_throwsIllegalArgumentExc(){
             Assertions.assertThrows(IllegalArgumentException.class, () -> {
                 UserController ctrl = new UserController();
                 ctrl.create(null);
@@ -54,7 +54,7 @@ class UserControllerTest {
         }
 
         @Test
-        void RULE_withNullUser_throwsIllegalArgumentExc(){
+        void THROWN_MESSAGE_withNullUser_throwsIllegalArgumentExc(){
             Exception thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> {
                 UserController ctrl = new UserController();
                 ctrl.create(null);
