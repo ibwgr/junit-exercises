@@ -15,22 +15,38 @@ class UserValidatorTest {
 
         @Test
         void returnsTrueIfOnlyLetters(){
-            throw new IllegalArgumentException("you should implement code here");
+            UserValidator userValidator = new UserValidator();
+
+            boolean isValid = userValidator.isValidUsername("abc");
+
+            Assertions.assertTrue(isValid);
         }
 
         @Test
         void returnsFalseIfStartsWithNumber(){
-            throw new IllegalArgumentException("you should implement code here");
+          UserValidator userValidator = new UserValidator();
+
+          boolean isValid = userValidator.isValidUsername("1abc");
+
+          Assertions.assertFalse(isValid);
         }
 
         @Test
         void returnsTrueIfContainsNumberButNotAsFirstChar(){
-            throw new IllegalArgumentException("you should implement code here");
+            UserValidator userValidator = new UserValidator();
+
+            boolean isValid = userValidator.isValidUsername("a1bc");
+
+            Assertions.assertTrue(isValid);
         }
 
         @Test
         void returnsFalseIfContainsAnyNonAlphanumericChar(){
-            throw new IllegalArgumentException("you should implement code here");
+            UserValidator userValidator = new UserValidator();
+
+            boolean isValid = userValidator.isValidUsername("abc!");
+
+            Assertions.assertFalse(isValid);
         }
     }
 

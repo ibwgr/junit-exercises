@@ -27,6 +27,12 @@ public class UserValidator {
     }
 
     public boolean isValidUsername(String username){
+        if(username.matches("^\\d.*")){
+            return false;
+        }
+        if(!username.matches("^[\\w\\d]*$")){
+            return false;
+        }
         return true;
     }
 }
