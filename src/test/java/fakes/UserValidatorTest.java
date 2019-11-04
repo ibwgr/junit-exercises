@@ -42,7 +42,7 @@ class UserValidatorTest {
         }
 
         @Test
-        void returnsFalseIfSameNameInDBButWithDifferentLetterCasing(){
+        void returnsTrueIfSameNameInDBButWithDifferentLetterCasing(){
             throw new IllegalArgumentException("you should implement code here");
         }
     }
