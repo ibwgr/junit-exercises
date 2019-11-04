@@ -32,12 +32,12 @@ class UserValidatorTest {
     static class doesUsernameExist{
 
         @Test
-        void returnsTrueIfUsernameNotInDBYet(){
+        void returnsFalseIfUsernameNotInDBYet(){
             throw new IllegalArgumentException("you should implement code here");
         }
 
         @Test
-        void returnsFalseIfUsernameInDB(){
+        void returnsTrueIfUsernameInDB(){
             throw new IllegalArgumentException("you should implement code here");
         }
     }
