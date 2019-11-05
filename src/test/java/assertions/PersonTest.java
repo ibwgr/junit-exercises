@@ -1,9 +1,11 @@
 package assertions;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 class PersonTest {
 
@@ -12,7 +14,9 @@ class PersonTest {
     @Test
     void getFullNameReturnsFirstnameSpaceLastname(){
         // TODO implement
-        throw new NotImplementedException();
+        Person hans = new Person("Hans","Muster", LocalDate.of(2001,1,10));
+        String fullName = hans.getFullName();
+        Assertions.assertEquals("Hans Muster", fullName);
     }
 
     // TODO some more useful tests
@@ -22,18 +26,19 @@ class PersonTest {
 
     // TODO verbessern. Hinweis: Repeatable (wiederholbar) zu jeder Zeit.
     @Test
-    void getAgeReturns10YearsIfBornIn2009() throws Exception {
-        Person p = new Person("", "", LocalDate.of(2009, 1, 1));
+    void getAgeReturns10YearsIfBorn10YearsAgo() throws Exception {
+        Person person = new Person("", "", LocalDate.now().minusYears(10));
+        Period age = person.getAge();
 
-        throw new NotImplementedException();
+        Assertions.assertEquals(10,age.getYears());
     }
 
     @Test
     void getAgeReturns1DayIfYesterday() throws Exception {
         Person p = new Person("", "", LocalDate.now().minusDays(1));
+        Period age = p.getAge();
 
-        // TODO implement
-        throw new NotImplementedException();
+        Assertions.assertEquals(1, age.getDays());
     }
     // TODO some more useful tests
 }
