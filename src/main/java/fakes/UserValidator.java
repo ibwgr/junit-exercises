@@ -26,13 +26,50 @@ public class UserValidator {
         return false;
     }
 
+//    // Regular Expression based solution
+//    public boolean isValidUsername(String username){
+//        if(username.matches("^\\d.*")){
+//            return false;
+//        }
+//        if(!username.matches("^[\\w\\d]*$")){
+//            return false;
+//        }
+//        return true;
+//    }
+
+    // ASCII Code based solution
     public boolean isValidUsername(String username){
-        if(username.matches("^\\d.*")){
+        if(startsWithDigit(username)){
             return false;
         }
-        if(!username.matches("^[\\w\\d]*$")){
+        if(containsSpecialChar(username)){
             return false;
         }
         return true;
+    }
+
+    private boolean containsSpecialChar(String value) {
+        for(char c : value.toCharArray()){
+            if (!isDigit(c) && !isAlpha(c)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean startsWithDigit(String value) {
+        if(!value.isEmpty()){
+            char firstChar = value.charAt(0);
+            return isDigit(firstChar);
+        }
+        return false;
+    }
+
+    private boolean isAlpha(char c) {
+        return (c >= 65 && c <= 90) || (c >= 97 && c <= 122);
+    }
+
+    private boolean isDigit(char c) {
+        return c >= 48 && c <= 57;
     }
 }
