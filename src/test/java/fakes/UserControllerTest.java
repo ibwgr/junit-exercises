@@ -20,7 +20,7 @@ class UserControllerTest {
         // --- Testing with Fakes ---
 
         @Test
-        void NO_FAKE_withValidInexistingUsername_returnsOK(){
+        void withValidInexistingUsername_returnsOK__NO_FAKE(){
             // - Dieser Test ist nicht wiederholbar.
             //   Beim zweiten Durchlauf schlägt er fehl, weil dann der Benutzer bereits in der Datenbank existiert
             // - Dieser Test ist langsam, weil er von der langsamen Datenbank abhängig ist.
@@ -33,7 +33,19 @@ class UserControllerTest {
         }
 
         @Test
-        void MOCKITO_FAKE_withValidInexistingUsername_returnsOK(){
+        void withValidInexistingUsername_returnsOK__FAKE(){
+            UserValidator userValidator = new FakeUserValidator(false, true);
+
+            UserController ctrl = new UserController(userValidator);
+            User user = new User("kalua");
+
+            Message result = ctrl.create(user);
+
+            Assertions.assertEquals(Message.Status.OK, result.status);
+        }
+
+        @Test
+        void withValidInexistingUsername_returnsOK__MOCKITO(){
             UserValidator userValidator = mock(UserValidator.class);
 
             when(userValidator.isValidUsername(anyString())).thenReturn(true);
@@ -48,10 +60,23 @@ class UserControllerTest {
         }
 
         @Test
-        void FAKE_DB_withValidInexistingUsername_addsUserToDB(){
+        void withValidInexistingUsername_addsUserToDB__FAKE(){
+            UserValidator userValidator = new FakeUserValidator(false, true);
+            Database db = new FakeDatabase();
+
+            UserController ctrl = new UserController(userValidator, db);
+            ctrl.create(new User("h"));
+
+            Assertions.assertEquals("h", db.getUsers().get(0).getUsername());
+        }
+
+        @Test
+        void withValidInexistingUsername_addsUserToDB__MOCKITO(){
             UserValidator userValidator = mock(UserValidator.class);
 
-            // doReturn(true).when(userValidator).isValidUsername(anyString()); // Gleicher Effekt wie nächste Zeile. Nur dass hier die Methode isValidUsername nicht aufgerufen wird.
+            // doReturn... ist ähnlich wie when().thenReturn.
+            // Bei doReturn... wird die Methode isValidUsername allerdings nicht gleich aufgerufen.
+            // doReturn(true).when(userValidator).isValidUsername(anyString());
             when(userValidator.isValidUsername(anyString())).thenReturn(true);
             when(userValidator.doesUsernameExist(anyString())).thenReturn(false);
 
