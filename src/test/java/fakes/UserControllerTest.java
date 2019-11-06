@@ -39,7 +39,6 @@ class UserControllerTest {
             when(userValidator.isValidUsername(anyString())).thenReturn(true);
             when(userValidator.doesUsernameExist(anyString())).thenReturn(false);
 
-
             UserController ctrl = new UserController(userValidator);
             User user = new User("kalua");
 
@@ -52,6 +51,7 @@ class UserControllerTest {
         void FAKE_DB_withValidInexistingUsername_addsUserToDB(){
             UserValidator userValidator = mock(UserValidator.class);
 
+            // doReturn(true).when(userValidator).isValidUsername(anyString()); // Gleicher Effekt wie nächste Zeile. Nur dass hier die Methode isValidUsername nicht aufgerufen wird.
             when(userValidator.isValidUsername(anyString())).thenReturn(true);
             when(userValidator.doesUsernameExist(anyString())).thenReturn(false);
 
