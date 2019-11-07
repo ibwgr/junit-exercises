@@ -1,8 +1,5 @@
 package assertions;
 
-import java.time.LocalDate;
-import java.time.Period;
-
 public class Person {
 
     private final String firstName;

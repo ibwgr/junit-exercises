@@ -3,20 +3,17 @@ package assertions;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
-import java.time.Period;
-
 class PersonTestSolution {
 
     // getFullName
 
     @Test
     void getFullNameReturnsFirstnameSpaceLastname(){
-        Person p = new Person("Hannes", "Meier", null);
+        Person p = new Person("Hutter", "Stefan", null);
 
         String fullName = p.getFullName();
 
-        Assertions.assertEquals(fullName, "Hannes Meier");
+        Assertions.assertEquals(fullName, "Stefan Hutter");
     }
 
     // getAge
