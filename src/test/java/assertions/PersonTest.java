@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package assertions;
 
 import org.junit.jupiter.api.Assertions;
@@ -41,4 +42,43 @@ class PersonTest {
         Assertions.assertEquals(1, age.getDays());
     }
     // TODO some more useful tests
+=======
+package assertions;
+
+import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+
+class PersonTest {
+
+    // getFullName
+
+    @Test
+    void getFullNameReturnsFirstnameSpaceLastname(){
+        // TODO implement
+        throw new IllegalArgumentException("you should implement code here");
+    }
+
+    // TODO some more useful tests
+
+    // getAge
+
+
+    // TODO verbessern. Hinweis: Repeatable (wiederholbar) zu jeder Zeit.
+    @Test
+    void getAgeReturns10YearsIfBornIn2009() throws Exception {
+        Person p = new Person("", "", LocalDate.of(2009, 1, 1));
+
+        throw new IllegalArgumentException("you should implement code here");
+    }
+
+    @Test
+    void getAgeReturns1DayIfYesterday() throws Exception {
+        Person p = new Person("", "", LocalDate.now().minusDays(1));
+
+        // TODO implement
+        throw new IllegalArgumentException("you should implement code here");
+    }
+    // TODO some more useful tests
+>>>>>>> 3e013e4be3a71470f8678448dfc73902047284b8
 }

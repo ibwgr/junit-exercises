@@ -2,7 +2,6 @@ package fakes;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 class UserValidatorTest {
 
@@ -11,35 +10,40 @@ class UserValidatorTest {
 
         @Test
         void returnsTrueIfOnlyLetters(){
-            throw new NotImplementedException();
+            throw new IllegalArgumentException("you should implement code here");
         }
 
         @Test
         void returnsFalseIfStartsWithNumber(){
-            throw new NotImplementedException();
+            throw new IllegalArgumentException("you should implement code here");
         }
 
         @Test
         void returnsTrueIfContainsNumberButNotAsFirstChar(){
-            throw new NotImplementedException();
+            throw new IllegalArgumentException("you should implement code here");
         }
 
         @Test
         void returnsFalseIfContainsAnyNonAlphanumericChar(){
-            throw new NotImplementedException();
+            throw new IllegalArgumentException("you should implement code here");
         }
     }
 
     static class doesUsernameExist{
 
         @Test
-        void returnsTrueIfUsernameNotInDBYet(){
-            throw new NotImplementedException();
+        void returnsFalseIfUsernameNotInDBYet(){
+            throw new IllegalArgumentException("you should implement code here");
         }
 
         @Test
-        void returnsFalseIfUsernameInDB(){
-            throw new NotImplementedException();
+        void returnsTrueIfUsernameInDB(){
+            throw new IllegalArgumentException("you should implement code here");
+        }
+
+        @Test
+        void returnsTrueIfSameNameInDBButWithDifferentLetterCasing(){
+            throw new IllegalArgumentException("you should implement code here");
         }
     }
 }
