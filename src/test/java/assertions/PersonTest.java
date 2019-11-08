@@ -82,14 +82,14 @@ class PersonTest {
     }
 
     @Test
-    void Person_TrueIf2ObjectsAreNotEqual(){
+    void Person_TrueIf2ObjectsAreNotSame(){
         Person p = new Person("Hannes", "Meier", LocalDate.of(1940, 6, 30));
         Person c = new Person("Petra", "Meier", LocalDate.of(1950, 3, 12));
         Assertions.assertNotSame(p, c);
     }
 
     @Test
-    void Person_TrueIf2ObjectsAreEqual(){
+    void Person_TrueIf2ObjectsAreSame(){
         Person p = new Person("Hannes", "Meier", LocalDate.of(1940, 6, 30));
         Person c = p;
         Assertions.assertSame(p, c);

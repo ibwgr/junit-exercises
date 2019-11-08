@@ -13,13 +13,19 @@ class UserControllerTest {
         // --- Testing with Fakes ---
 
         @Test
-        void NO_FAKE_withValidInexistingUsername_returnsOK(){
+        void withValidInexistingUsername_returnsOK_NO_FAKE(){
             UserController ctrl = new UserController();
             User user = new User("kalua");
 
             Message result = ctrl.create(user);
 
             Assertions.assertEquals(result.status, Message.Status.OK);
+        }
+
+        @Test
+        void withValidInexistingUsername_returnsOK_FAKE(){
+            UserController userController = new UserController();
+
         }
 
    /*     @Test
