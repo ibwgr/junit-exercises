@@ -10,11 +10,13 @@ public class UserValidator {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return db.getUsers().stream()
-                .filter(u ->
-                        u.getUsername().equals(username)
-                )
-                .count() > 0;
+
+        for(User user : db.getUsers()){
+            if (user.getUsername().equals(username)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public static boolean isValidUsername(String username){
