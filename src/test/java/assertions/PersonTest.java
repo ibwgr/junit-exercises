@@ -39,18 +39,13 @@ class PersonTest {
     }
 
     @Test
-<<<<<<< HEAD
+
     void getFullNameShouldNotReturnLastnameSpaceFirstname(){
         Person a = new Person("Philipp","Tuor", LocalDate.of(1989, 06, 21));
 
         String fullName = a.getFullName();
 
         Assert.assertNotEquals("Tuor Philipp", fullName);
-=======
-    void getFullNameReturnsFirstnameSpaceLastname(){
-        // TODO implement
-        throw new IllegalArgumentException("you should implement code here");
->>>>>>> 3e013e4be3a71470f8678448dfc73902047284b8
     }
 
 
@@ -65,25 +60,18 @@ class PersonTest {
 
         Period actualAge = p.getAge();
 
-<<<<<<< HEAD
+
         Assert.assertEquals(10, actualAge.getYears());
-=======
-        throw new IllegalArgumentException("you should implement code here");
->>>>>>> 3e013e4be3a71470f8678448dfc73902047284b8
     }
 
     @Test
     void getAgeReturns1DayIfYesterday() throws Exception {
         Person p = new Person("", "", LocalDate.now().minusDays(1));
-
-<<<<<<< HEAD
+        
         Period actualAge = p.getAge();
 
         Assert.assertEquals(1, actualAge.getDays());
-=======
-        // TODO implement
-        throw new IllegalArgumentException("you should implement code here");
->>>>>>> 3e013e4be3a71470f8678448dfc73902047284b8
+
     }
 
     @Test
