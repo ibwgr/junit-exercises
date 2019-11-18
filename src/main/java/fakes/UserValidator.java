@@ -2,24 +2,46 @@ package fakes;
 
 public class UserValidator {
 
-    private static Database db = FileDatabase.getInstance();
+    private Database db;
 
-    public static boolean doesUsernameExist(String username){
+    UserValidator(){
+
+    }
+
+    UserValidator(FileDatabase fileDatabase){
+        this.db = fileDatabase;
+    }
+
+    public boolean doesUsernameExist(String username){
         try {
-            Thread.sleep(5000);
+            Thread.sleep(50);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
         for(User user : db.getUsers()){
-            if (user.getUsername().equals(username)){
+            String name = user.getUsername().toUpperCase();
+
+            if (name.equals(username.toUpperCase())){
                 return true;
             }
         }
         return false;
     }
 
-    public static boolean isValidUsername(String username){
+    public boolean isValidUsername(String username){
+        char ch;
+        for (int i= 0; i< username.length(); i++){
+            ch = username.charAt(i);
+
+            if (( i == 0 ) && ( Character.isDigit(ch))){
+                return false;
+            }
+
+            if ( !Character.isAlphabetic(ch) && !Character.isDigit(ch) ){
+                return false;
+            }
+        }
         return true;
     }
 }
