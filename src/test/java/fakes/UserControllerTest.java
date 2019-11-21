@@ -78,9 +78,10 @@ class UserControllerTest {
           FakeFileDatabase fakefileDatabase = new FakeFileDatabase();
           UserController ctrl = new UserController(new FakeUserValidator(true, false), fakefileDatabase);
 
-          Message result = ctrl.create(user);
+          ctrl.create(user);
+          String usernameDB = fakefileDatabase.getUsers().get(0).getUsername();
 
-          Assertions.assertEquals(Message.Status.OK, result.status);
+          Assertions.assertEquals("Julian", usernameDB);
       }
 
       /***********************************************************************************************************/
