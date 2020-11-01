@@ -1,48 +1,45 @@
 package assertions;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.Period;
 
-/**
- * Created by ideadapt on 09.10.16.
- */
-public class PersonTestSolution {
+class PersonTestSolution {
 
     // getFullName
 
     @Test
-    public void getFullNameReturnsFirstnameSpaceLastname(){
+    void getFullNameReturnsFirstnameSpaceLastname(){
         Person p = new Person("Hannes", "Meier", null);
 
         String fullName = p.getFullName();
 
-        Assert.assertEquals(fullName, "Hannes Meier");
+        Assertions.assertEquals(fullName, "Hannes Meier");
     }
 
     // getAge
 
     @Test
-    public void getAgeReturns10YearsIf10YearsAgo() throws Exception {
+    void getAgeReturns10YearsIf10YearsAgo() throws Exception {
         Person p = new Person("", "", LocalDate.now().minusYears(10));
 
         Period age = p.getAge();
 
-        Assert.assertEquals(10, age.getYears());
-        Assert.assertEquals(0, age.getMonths());
-        Assert.assertEquals(0, age.getDays());
+        Assertions.assertEquals(10, age.getYears());
+        Assertions.assertEquals(0, age.getMonths());
+        Assertions.assertEquals(0, age.getDays());
     }
 
     @Test
-    public void getAgeReturns1DayIfYesterday() throws Exception {
+    void getAgeReturns1DayIfYesterday() throws Exception {
         Person p = new Person("", "", LocalDate.now().minusDays(1));
 
         Period age = p.getAge();
 
-        Assert.assertEquals(0, age.getYears());
-        Assert.assertEquals(0, age.getMonths());
-        Assert.assertEquals(1, age.getDays());
+        Assertions.assertEquals(0, age.getYears());
+        Assertions.assertEquals(0, age.getMonths());
+        Assertions.assertEquals(1, age.getDays());
     }
 }

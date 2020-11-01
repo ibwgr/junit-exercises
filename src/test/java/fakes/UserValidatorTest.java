@@ -1,46 +1,49 @@
 package fakes;
 
-import org.junit.Test;
-import org.junit.experimental.runners.Enclosed;
-import org.junit.runner.RunWith;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 
-@RunWith(Enclosed.class)
-public class UserValidatorTest {
+class UserValidatorTest {
 
-    public static class isValidUsername{
+    @Nested
+    class isValidUsername{
 
         @Test
-        public void returnsTrueIfOnlyLetters(){
-            throw new NotImplementedException();
+        void returnsTrueIfOnlyLetters(){
+            throw new IllegalArgumentException("you should implement code here");
         }
 
         @Test
-        public void returnsFalseIfStartsWithNumber(){
-            throw new NotImplementedException();
+        void returnsFalseIfStartsWithNumber(){
+            throw new IllegalArgumentException("you should implement code here");
         }
 
         @Test
-        public void returnsTrueIfContainsNumberButNotAsFirstChar(){
-            throw new NotImplementedException();
+        void returnsTrueIfContainsNumberButNotAsFirstChar(){
+            throw new IllegalArgumentException("you should implement code here");
         }
 
         @Test
-        public void returnsFalseIfContainsAnyNonAlphanumericChar(){
-            throw new NotImplementedException();
+        void returnsFalseIfContainsAnyNonAlphanumericChar(){
+            throw new IllegalArgumentException("you should implement code here");
         }
     }
 
-    public static class doesUsernameExist{
+    static class doesUsernameExist{
 
         @Test
-        public void returnsTrueIfUsernameNotInDBYet(){
-            throw new NotImplementedException();
+        void returnsFalseIfUsernameNotInDBYet(){
+            throw new IllegalArgumentException("you should implement code here");
         }
 
         @Test
-        public void returnsFalseIfUsernameInDB(){
-            throw new NotImplementedException();
+        void returnsTrueIfUsernameInDB(){
+            throw new IllegalArgumentException("you should implement code here");
+        }
+
+        @Test
+        void returnsTrueIfSameNameInDBButWithDifferentLetterCasing(){
+            throw new IllegalArgumentException("you should implement code here");
         }
     }
 }
