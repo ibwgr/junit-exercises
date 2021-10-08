@@ -1,5 +1,6 @@
 package assertions;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -10,30 +11,60 @@ class PersonTest {
 
     @Test
     void getFullNameReturnsFirstnameSpaceLastname(){
-        // TODO implement
-        throw new IllegalArgumentException("you should implement code here");
+        String lastname = "Desax";
+        String firstname = "Gion";
+        Person p = new Person(firstname, lastname, null);
+        String fullname = firstname + " " + lastname;
+        Assertions.assertEquals(fullname, p.getFullName());
     }
 
-    // TODO some more useful tests
+    @Test
+    void getFullNameNotReturnsFirstnameSpaceLastname(){
+        String lastname = "Desax";
+        String firstname = "Gion";
+        Person p = new Person(firstname, lastname, null);
 
+        String fullName = lastname + " " + firstname;
+        Assertions.assertNotEquals(fullName,p.getFullName());
+    }
+
+   @Test
+   void getFullNameReturnsFirstCharsInBigLetters(){
+        String lastname = "Desax";
+        String firstname = "Gion";
+        Person p = new Person(firstname, lastname, null);
+        String[] arrStr = p.getFullName().split(" ");
+        for(String a : arrStr){
+            if (!Character.isUpperCase(a.charAt(0))) {
+                assert false;
+            }
+        }
+   }
 
     // --- getAge
 
     @Test
-    void getAgeReturns10YearsIfBornIn2009() throws Exception {
-        // TODO verbessern. Hinweis: Repeatable (wiederholbar) zu jeder Zeit.
-        Person p = new Person("", "", LocalDate.of(2009, 1, 1));
-
-        throw new IllegalArgumentException("you should implement code here");
+    void getAgeReturns10YearsIfBorn10YearsAgo()  {
+        Person p = new Person("", "", LocalDate.now().minusYears(10));
+        Assertions.assertEquals(10,p.getAge().getYears());
+        Assertions.assertEquals(0,p.getAge().getMonths());
+        Assertions.assertEquals(0,p.getAge().getDays());
     }
 
     @Test
-    void getAgeReturns1DayIfYesterday() throws Exception {
+    void getAgeReturns1DayIfYesterday() {
         Person p = new Person("", "", LocalDate.now().minusDays(1));
-
-        // TODO implement
-        throw new IllegalArgumentException("you should implement code here");
+        Assertions.assertEquals(0, p.getAge().getYears());
+        Assertions.assertEquals(0,p.getAge().getMonths());
+        Assertions.assertEquals(1,p.getAge().getDays());
     }
 
-    // TODO some more useful tests
+    @Test
+    void getAgeReturnIsPositiv(){
+        LocalDate birtDay = LocalDate.now().plusDays(1);
+        Person p = new Person("", "", birtDay);
+        if(!p.getAge().isNegative()){
+            assert false;
+        }
+    }
 }
