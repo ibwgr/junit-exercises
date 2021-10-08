@@ -61,7 +61,7 @@ class PersonTest {
 
     @Test
     void getAgeReturnIsNotTooHigh(){
-        LocalDate birthDay = LocalDate.now().plusDays(1);
+        LocalDate birthDay = LocalDate.now().plusDays(0);
         Person p = new Person("", "", birthDay);
         if(p.getAge().isNegative()){
             AssertionError error = new AssertionError("LocalDate birthday " + birthDay + " is set to future");
