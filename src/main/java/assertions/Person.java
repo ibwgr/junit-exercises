@@ -22,4 +22,13 @@ public class Person {
     public Period getAge(){
         return Period.between(birthDate, LocalDate.now());
     }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", birthDate=" + birthDate +
+                '}';
+    }
 }
