@@ -25,7 +25,7 @@ class PersonTest {
     // --- getAge
 
     @Test
-    void getAgeReturns10YearsIfBornIn2011() throws Exception {
+    void getAgeReturns10YearsIfBorn10YearsFromToday() throws Exception {
         // TODO verbessern. Hinweis: Repeatable (wiederholbar) zu jeder Zeit.
         Person p = new Person("", "", LocalDate.now().minusYears(10));
 
