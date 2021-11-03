@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 class PersonTest {
 
-    // getFullName
+    // --- getFullName
 
     @Test
     void getFullNameReturnsFirstnameSpaceLastname(){
@@ -16,12 +16,12 @@ class PersonTest {
 
     // TODO some more useful tests
 
-    // getAge
 
+    // --- getAge
 
-    // TODO verbessern. Hinweis: Repeatable (wiederholbar) zu jeder Zeit.
     @Test
     void getAgeReturns10YearsIfBornIn2009() throws Exception {
+        // TODO verbessern. Hinweis: Repeatable (wiederholbar) zu jeder Zeit.
         Person p = new Person("", "", LocalDate.of(2009, 1, 1));
 
         throw new IllegalArgumentException("you should implement code here");
@@ -34,5 +34,6 @@ class PersonTest {
         // TODO implement
         throw new IllegalArgumentException("you should implement code here");
     }
+
     // TODO some more useful tests
 }
