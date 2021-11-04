@@ -28,14 +28,14 @@ class PersonTest {
     // --- getAge
 
     @Test
-    void getAgeReturns10YearsIfBornIn2009()  {
+    void getAgeReturns10YearsIfBornThenYearsAgo()  {
         Person p = new Person("", "", LocalDate.now().minusYears(10));
         Period age = p.getAge();
         Assertions.assertEquals(10, age.getYears());
     }
 
     @Test
-    void getAgeReturns1DayIfYesterday()  {
+    void getAgeReturns1DayIfBornYesterday()  {
         Person p = new Person("", "", LocalDate.now().minusDays(1));
         Period age = p.getAge();
         Assertions.assertEquals(1, age.getDays());
