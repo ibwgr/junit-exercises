@@ -11,9 +11,9 @@ class UserControllerTest {
   class create {
 
     // --- Testing with Fakes ---
-
     @Test
-    void withValidInexistingUsername_returnsOK__NO_FAKE() {
+    @org.junit.jupiter.api.Disabled
+    void withValidInexistingUsername_returnsOK__NO_FAKE_DEMO() {
       UserController ctrl = new UserController();
       User user = new User("kalua");
 
@@ -36,12 +36,14 @@ class UserControllerTest {
     }
 
     @Test
-    void withValidInexitingUserName_addUserToDB__FAKE() {
+    void withValidInexitingUsername_addUserToDB__FAKE() {
       // TODO
+      // Der Test soll prüfen, ob der Benutzer tatsächlich der DB hinzugefügt wurde.
+      // Dazu soll ein Database Mock Objekt verwendet werden.
     }
 
     @Test
-    void withValidInexitingUserName_addUserToDB__MOCKITO() {
+    void withValidInexitingUsername_addUserToDB__MOCKITO() {
       // TODO
     }
 
