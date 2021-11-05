@@ -2,12 +2,12 @@ package fakes;
 
 public class UserController {
     private UserValidator userValidator;
-    private MockDatabase db;
+    private Database db;
    // private static Database db = FileDatabase.getInstance();
 
-    public UserController(UserValidator userValidator, MockDatabase mockDatabase) {
+    public UserController(UserValidator userValidator, Database database) {
         this.userValidator = userValidator;
-        this.db = mockDatabase;
+        this.db = database;
     }
 
     public Message create(User user){

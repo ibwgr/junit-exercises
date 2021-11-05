@@ -4,7 +4,15 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 
 class UserControllerTest {
 
@@ -16,7 +24,21 @@ class UserControllerTest {
     @Test
     @org.junit.jupiter.api.Disabled
     void withValidInexistingUsername_returnsOK__NO_FAKE_DEMO() {
-      UserController ctrl = new UserController(new FakeUserValidator(), new MockDatabase());
+      // check
+      try {
+        // datenbankfile wird geleert...
+        FileOutputStream writer = new FileOutputStream(FileDatabase.getPath());
+        writer.write(("").getBytes());
+        writer.close();
+      } catch (IOException e) {
+        System.out.println("IO Problem Filedatenbank");
+        System.out.println(e.getMessage());
+      }
+
+      UserValidator uv = new UserValidator();
+      UserController ctrl = new UserController(uv, FileDatabase.getInstance());
+
+      // da die datenbank geleert wurde, gibts nun den testnamen nicht da drin
       User user = new User("kalua");
 
       Message result = ctrl.create(user);
@@ -26,10 +48,12 @@ class UserControllerTest {
 
     @Test
     void withValidInexistingUsername_returnsOK__FAKE() {
-      // TODO
+      // check
       // 1. Test schneller machen
       // 2. UserController.create so beinflussen,
       //    dass einmal der "if"- und einmal der "else"-Fall durchlaufen wird
+      // => der else-Fall findet sich in der Methode withValidExistingUsername_returnsNOTOK__FAKE
+
       FakeUserValidator fakeUserValidator = new FakeUserValidator();
       // User wurde nicht erkannt
       fakeUserValidator.setUserOk(false);
@@ -43,6 +67,7 @@ class UserControllerTest {
 
     @Test
     void withValidExistingUsername_returnsNOTOK__FAKE() {
+      // check
       FakeUserValidator fakeUserValidator = new FakeUserValidator();
       // User wurde erkannt
       fakeUserValidator.setUserOk(true);
@@ -57,17 +82,32 @@ class UserControllerTest {
     @Test
     void withValidInexistingUsername_returnsOK__MOCKITO() {
       // TODO
+      Database mockDatabase = mock(Database.class);
+      final UserValidator uv = new UserValidator();
+
+      List users = new ArrayList();
+      users.add("Peter");
+      doReturn(users).when(mockDatabase).getUsers();
+
+      UserController mockCtrl = mock(UserController.class);
+
+      User user = new User("kalua");
+
+      Message result = mockCtrl.create(user);
+      Assertions.assertEquals(result.status, Message.Status.NOT_OK);
     }
 
     @Test
     void returnsFalseIfUsernameNotInDBYet() {
+      // check
       Database mockDatabase = mock(Database.class);
       final UserValidator uv = new UserValidator();
 
-    List users = new ArrayList();
-    users.add("peter");
+      List users = new ArrayList();
+      users.add("Peter");
       doReturn(users).when(mockDatabase).getUsers();
-      final boolean usernameExists = uv.doesUsernameExist("peter");
+
+      final boolean usernameExists = uv.doesUsernameExist("Peter");
 
       Assertions.assertFalse(usernameExists);
     }
