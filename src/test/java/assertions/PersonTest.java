@@ -38,7 +38,9 @@ class PersonTest {
     void getAgeReturns1DayIfBornYesterday()  {
         Person p = new Person("", "", LocalDate.now().minusDays(1));
         Period age = p.getAge();
+
         Assertions.assertEquals(1, age.getDays());
+        Assertions.assertEquals(0, age.getMonths());
     }
 
     @Test
