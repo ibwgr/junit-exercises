@@ -4,12 +4,12 @@ public class UserValidator {
 
     private static Database db = FileDatabase.getInstance();
 
-    public static boolean doesUsernameExist(String username){
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public boolean doesUsernameExist(String username){
+//        try {
+//            Thread.sleep(5000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
         for(User user : db.getUsers()){
             if (user.getUsername().equals(username)){
@@ -19,7 +19,7 @@ public class UserValidator {
         return false;
     }
 
-    public static boolean isValidUsername(String username){
+    public boolean isValidUsername(String username){
         return true;
     }
 }
