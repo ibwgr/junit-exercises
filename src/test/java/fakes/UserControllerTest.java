@@ -4,6 +4,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+
 class UserControllerTest {
 
   // Pro getestete Methode gibt es eine inner class (Hier für UserController.create)
@@ -56,6 +62,12 @@ class UserControllerTest {
     @Test
     void withValidInexistingUsername_returnsOK__MOCKITO() {
       // TODO
+
+      UserValidator uv = mock(UserValidator.class);
+      doReturn(true).when(uv).doesUsernameExist(anyString());
+
+      Assertions.assertTrue(uv.doesUsernameExist("Foo"));
+
     }
 
     @Test
@@ -83,6 +95,15 @@ class UserControllerTest {
     @Test
     void withValidInexitingUsername_addUserToDB__MOCKITO() {
       // TODO
+      // Add User ist eine void method! -> kein return wert - ich fake einen Aufruf mit assertion true aber macht für mich keinen sinn...
+      Database database = mock(MockDatabase.class);
+      UserController ctrl = new UserController(new FakeUserValidator(false), database);
+      User user = new User("peter");
+      doReturn(true).when(database).addUser(user);
+
+      // --> funktioniert nicht weil void method: Assertions.assertTrue(database.addUser(user));
+
+
     }
 
     // --- Testing Exceptions ---

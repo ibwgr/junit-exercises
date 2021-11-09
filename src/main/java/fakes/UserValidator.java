@@ -20,6 +20,21 @@ public class UserValidator {
     }
 
     public boolean isValidUsername(String username){
+
+        // Check if only Letters
+        char[] chars = username.toCharArray();
+
+        int pos = 0;
+        for (char c : chars) {
+            if(!Character.isLetter(c)) {
+                if(Character.isDigit(c) && pos > 0){
+                    continue;
+                }
+                return false;
+            }
+            pos += 1;
+        }
+
         return true;
     }
 }
