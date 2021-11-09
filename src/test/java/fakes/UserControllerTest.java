@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doReturn;
@@ -96,12 +97,32 @@ class UserControllerTest {
     void withValidInexitingUsername_addUserToDB__MOCKITO() {
       // TODO
       // Add User ist eine void method! -> kein return wert - ich fake einen Aufruf mit assertion true aber macht für mich keinen sinn...
-      Database database = mock(MockDatabase.class);
-      UserController ctrl = new UserController(new FakeUserValidator(false), database);
-      User user = new User("peter");
-      doReturn(true).when(database).addUser(user);
+      Database database = new MockDatabase();
 
-      // --> funktioniert nicht weil void method: Assertions.assertTrue(database.addUser(user));
+      // Zur übung auch via mock könnte man aber einfach als FALSE definieren in der if unten
+      String uname = "peterli";
+      UserValidator uv = mock(UserValidator.class);
+      doReturn(false).when(uv).doesUsernameExist(anyString());
+
+      if(!uv.doesUsernameExist(uname)){
+        User user = new User(uname);
+        database.addUser(user);
+        // add user ist eine Void method daher prüfen wir nach dem adden...
+      }else{
+        // Hier abfangen mit Exception?
+        Assertions.fail("ein kleines whoopsie poopsi ist passiert - das dürfte nicht sein ;-)");
+      }
+
+      boolean doesUserExist = false;
+      List<User> dbUsers = database.getUsers();
+      for(User u : dbUsers){
+        if (u.getUsername().equals(uname)){
+          doesUserExist = true;
+        }
+      }
+      Assertions.assertTrue(doesUserExist);
+
+      // Die Add User kann nicht als Mock genutzt werden da dies eine void methode ist... So habe ich den UserValidator ge-"mockt"
 
 
     }
