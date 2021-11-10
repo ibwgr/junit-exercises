@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import static org.mockito.Mockito.*;
+
 class UserControllerTest {
 
   // Pro getestete Methode gibt es eine inner class (Hier für UserController.create)
@@ -14,7 +16,7 @@ class UserControllerTest {
     @Test
     @org.junit.jupiter.api.Disabled
     void withValidInexistingUsername_returnsOK__NO_FAKE_DEMO() {
-      UserController ctrl = new UserController(new FakeUserValidator(true));
+      UserController ctrl = new UserController(new FakeUserValidator(true, true));
       User user = new User("kalua");
 
       Message result = ctrl.create(user);
@@ -29,8 +31,10 @@ class UserControllerTest {
       // 1. Test schneller machen
       // 2. UserController.create so beinflussen,
       //    dass einmal der "if"- und einmal der "else"-Fall durchlaufen wird
+      //Warum NullPointerException? Musste Mockdatabase erzeugen..
 
-      UserController ctrl = new UserController(new FakeUserValidator(false));
+      MockDatabase db = new MockDatabase();
+      UserController ctrl = new UserController(new FakeUserValidator(false, true), db );
       User user = new User("peter");
 
       Message result = ctrl.create(user);
@@ -45,7 +49,7 @@ class UserControllerTest {
       // 1. Test schneller machen
       // 2. UserController.create so beinflussen,
       //    dass einmal der "if"- und einmal der "else"-Fall durchlaufen wird
-      UserController ctrl = new UserController(new FakeUserValidator(true));
+      UserController ctrl = new UserController(new FakeUserValidator(true, true));
       User user = new User("kalua");
 
       Message result = ctrl.create(user);
@@ -57,6 +61,19 @@ class UserControllerTest {
     @Test
     void withValidInexistingUsername_returnsOK__MOCKITO() {
       // TODO
+      //uv = Meine FakeUservalidation
+      //db = Meine FakeDataBase
+      //UserController Konstruktor mit parameter UserValidation, Database aufrufen
+      UserValidator uv = mock(UserValidator.class);
+      Database db = mock(Database.class);
+      UserController ctrl = new UserController(uv, db);
+
+      doReturn(true).when(uv).isValidUsername(anyString());
+      doReturn(false).when(uv).doesUsernameExist(anyString());
+
+      User user = new User("kalua");
+      Message result = ctrl.create(user);
+      Assertions.assertEquals(result.status, Message.Status.OK);
     }
 
     @Test
@@ -65,7 +82,7 @@ class UserControllerTest {
       // Der Test soll prüfen, ob der Benutzer tatsächlich der DB hinzugefügt wurde.
       // Dazu soll ein Database Mock Objekt verwendet werden.
       MockDatabase database =new MockDatabase();
-      UserController ctrl = new UserController(new FakeUserValidator(false), database);
+      UserController ctrl = new UserController(new FakeUserValidator(false, true), database);
       User user = new User("peter");
 
       Message result = ctrl.create(user);
@@ -86,7 +103,43 @@ class UserControllerTest {
     @Test
     void withValidInexitingUsername_addUserToDB__MOCKITO() {
       // TODO
-    }
+      UserValidator uv = mock(UserValidator.class);
+      Database db = mock(Database.class);
+      UserController ctrl = new UserController(uv, db);
+      User user = new User("kalua");
+      User user2 = new User("peter");
+
+      doReturn(true).when(uv).isValidUsername(anyString());
+      doReturn(false).when(uv).doesUsernameExist(anyString());
+      db.addUser(user);
+
+
+
+      verify(db, times(1)).addUser(any(User.class));
+
+      }
+
+      @Test
+      void withValidInexistingUsername_addUser2xToDB__MOCKITO(){
+        UserValidator uv = mock(UserValidator.class);
+        Database db = mock(Database.class);
+        UserController ctrl = new UserController(uv, db);
+        User user = new User("kalua");
+        User user2 = new User("peter");
+
+        doReturn(true).when(uv).isValidUsername(anyString());
+        doReturn(false).when(uv).doesUsernameExist(anyString());
+        db.addUser(user);
+        db.addUser(user2);
+
+
+        verify(db, times(2)).addUser(any(User.class));
+
+
+      }
+
+
+
 
     // --- Testing Exceptions ---
 
