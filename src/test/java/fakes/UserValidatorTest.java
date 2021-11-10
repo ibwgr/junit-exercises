@@ -13,22 +13,30 @@ class UserValidatorTest {
 
         @Test
         void returnsTrueIfOnlyLetters(){
-            throw new IllegalArgumentException("you should implement code here");
+            UserValidator validator = new UserValidator();
+            boolean validName = validator.isValidUsername("Claudia");
+            Assertions.assertTrue(validName);
         }
 
         @Test
         void returnsFalseIfStartsWithNumber(){
-            throw new IllegalArgumentException("you should implement code here");
+            UserValidator validator = new UserValidator();
+            boolean validName = validator.isValidUsername("1Claudia");
+            Assertions.assertFalse(validName);
         }
 
         @Test
         void returnsTrueIfContainsNumberButNotAsFirstChar(){
-            throw new IllegalArgumentException("you should implement code here");
+            UserValidator validator = new UserValidator();
+            boolean validName = validator.isValidUsername("c2a3dia");
+            Assertions.assertTrue(validName);
         }
 
         @Test
         void returnsFalseIfContainsAnyNonAlphanumericChar(){
-            throw new IllegalArgumentException("you should implement code here");
+            UserValidator validator = new UserValidator();
+            boolean validName = validator.isValidUsername("%inprozent");
+            Assertions.assertFalse(validName);
         }
     }
 
@@ -43,9 +51,26 @@ class UserValidatorTest {
             Assertions.assertFalse(usernameExist);
         }
 
+
+
         @Test
         void returnsTrueIfUsernameInDB(){
-            throw new IllegalArgumentException("you should implement code here");
+            Database db = new MockDatabase();
+            User user = new User("peter");
+            db.addUser(user);
+
+            UserValidator userValidator = new FakeUserValidator(true, true);
+            userValidator.doesUsernameExist("peter");
+            boolean exists = userValidator.doesUsernameExist("peter");
+
+            Assertions.assertTrue(exists);
+
+
+
+
+
+
+
         }
 
         @Test
