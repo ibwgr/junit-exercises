@@ -1,7 +1,10 @@
 package fakes;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+
+import static org.mockito.Mockito.mock;
 
 class UserValidatorTest {
 
@@ -33,7 +36,11 @@ class UserValidatorTest {
 
         @Test
         void returnsFalseIfUsernameNotInDBYet(){
-            throw new IllegalArgumentException("you should implement code here");
+           Database mockDatabase = mock(Database.class);
+
+            final UserValidator uv = new UserValidator();
+            final boolean usernameExist = uv.doesUsernameExist("peter");
+            Assertions.assertFalse(usernameExist);
         }
 
         @Test
