@@ -4,47 +4,50 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+import java.util.Locale;
+
 import static org.mockito.Mockito.mock;
 
 class UserValidatorTest {
 
     @Nested
-    class isValidUsername{
+    class isValidUsername {
 
         @Test
-        void returnsTrueIfOnlyLetters(){
+        void returnsTrueIfOnlyLetters() {
             UserValidator validator = new UserValidator();
             boolean validName = validator.isValidUsername("Claudia");
             Assertions.assertTrue(validName);
         }
 
         @Test
-        void returnsFalseIfStartsWithNumber(){
+        void returnsFalseIfStartsWithNumber() {
             UserValidator validator = new UserValidator();
             boolean validName = validator.isValidUsername("1Claudia");
             Assertions.assertFalse(validName);
         }
 
         @Test
-        void returnsTrueIfContainsNumberButNotAsFirstChar(){
+        void returnsTrueIfContainsNumberButNotAsFirstChar() {
             UserValidator validator = new UserValidator();
             boolean validName = validator.isValidUsername("c2a3dia");
             Assertions.assertTrue(validName);
         }
 
         @Test
-        void returnsFalseIfContainsAnyNonAlphanumericChar(){
+        void returnsFalseIfContainsAnyNonAlphanumericChar() {
             UserValidator validator = new UserValidator();
             boolean validName = validator.isValidUsername("%inprozent");
             Assertions.assertFalse(validName);
         }
     }
 
-    static class doesUsernameExist{
+    static class doesUsernameExist {
 
         @Test
-        void returnsFalseIfUsernameNotInDBYet(){
-           Database mockDatabase = mock(Database.class);
+        void returnsFalseIfUsernameNotInDBYet() {
+            Database mockDatabase = mock(Database.class);
 
             final UserValidator uv = new UserValidator();
             final boolean usernameExist = uv.doesUsernameExist("peter");
@@ -52,30 +55,37 @@ class UserValidatorTest {
         }
 
 
-
         @Test
-        void returnsTrueIfUsernameInDB(){
+        void returnsTrueIfUsernameInDB() {
             Database db = new MockDatabase();
-            User user = new User("peter");
+            User user = new User("hans");
             db.addUser(user);
+            boolean result = false;
 
-            UserValidator userValidator = new FakeUserValidator(true, true);
-            userValidator.doesUsernameExist("peter");
-            boolean exists = userValidator.doesUsernameExist("peter");
+            for (User u : db.getUsers()){
+                if (u.getUsername().equals(user.getUsername())){
+                     result = true;
+                }
+            }
 
-            Assertions.assertTrue(exists);
-
-
-
-
-
+            Assertions.assertTrue(result);
 
 
         }
 
         @Test
-        void returnsTrueIfSameNameInDBButWithDifferentLetterCasing(){
-            throw new IllegalArgumentException("you should implement code here");
+        void returnsTrueIfSameNameInDBButWithDifferentLetterCasing() {
+            User user = new User("PETER");
+
+            boolean result = false;
+            Database db = FileDatabase.getInstance();
+            for(User u : db.getUsers()){
+                if (u.getUsername().toLowerCase(Locale.ROOT).equals(user.getUsername().toLowerCase(Locale.ROOT))){
+                    result = true;
+                }
+            }
+            Assertions.assertTrue(result);
+
         }
     }
 }
