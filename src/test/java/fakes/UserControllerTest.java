@@ -114,7 +114,7 @@ class UserControllerTest {
       db.addUser(user);
 
 
-
+//überpüft wieviel mal der User auf der Datenbank registriert wurde
       verify(db, times(1)).addUser(any(User.class));
 
       }
@@ -137,6 +137,34 @@ class UserControllerTest {
 
 
       }
+      @Test
+       void withValidInexistingUsername_addUser2xToDBSameUser__MOCKITO() {
+      UserValidator uv = mock(UserValidator.class);
+      UserValidator uv2 = mock(UserValidator.class);
+      Database db = mock(Database.class);
+      UserController ctrl = new UserController(uv, db);
+      UserController ctrl2 = new UserController(uv2, db);
+      User user = new User("kalua");
+
+        doReturn(true).when(uv).isValidUsername(anyString());
+        doReturn(false).when(uv).doesUsernameExist(anyString());
+
+        Message result = ctrl.create(user);
+
+       Assertions.assertEquals(result.status, Message.Status.OK);
+
+
+      doReturn(true).when(uv2).isValidUsername(anyString());
+      doReturn(true).when(uv2).doesUsernameExist(anyString());
+
+      Message result2 = ctrl2.create(user);
+      Assertions.assertEquals(result2.status, Message.Status.NOT_OK);
+
+
+      verify(db, times(1)).addUser(any(User.class));
+
+    }
+
 
 
 
