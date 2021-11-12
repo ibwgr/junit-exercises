@@ -12,19 +12,8 @@ class PersonTest {
     @Test
     void getFullNameReturnsFirstnameSpaceLastname(){
         // TODO implement
-        Person persontest1 = new Person("Peter", "Mustermannomann",null);
-
-        Assertions.assertEquals(persontest1.getFullName(), "Peter Mustermannomann");
-        //String gesamtname = persontest1.getFullName();
-        //Assertions.assertEquals(gesamtname, "Peter Mustermannomann");
-
-
-//        if(persontest1.getFullName().contains(" ")){
-//            System.out.println("hat ein Leerzeichen");
-//        }
-//        else{
-//            System.out.println("hat kein Leerzeichen, ist fehlgeschlagen");
-//        }
+        Person p1 = new Person("Peter", "Mustermannomann",null);
+        Assertions.assertEquals(p1.getFullName(), "Peter Mustermannomann");
         //throw new IllegalArgumentException("you should implement code here");
     }
 
@@ -70,19 +59,5 @@ class PersonTest {
     }
 
     // TODO some more useful tests
-    @Test                       //ü
-    public void getFullNameNoHaveUE(){
-        Person p1 = new Person("Peterli", "Musti",null);
-        String str = p1.getFullName();
 
-        if (str.contains("ü")) {
-            System.out.println("hat ü, also die Methode hat ein ü");
-            Assertions.assertTrue(false);
-        } else {
-            System.out.println("hat kein ü");
-            Assertions.assertTrue(true);
-        }
-
-
-    }
 }

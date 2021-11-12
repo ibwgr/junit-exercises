@@ -15,16 +15,13 @@ public class PMain {
         //Person p4 = new Person("Hans","Muster",(LocalDate.now()-(LocalDate.of(2021,10,14))));
         Person p5 = new Person("Frau","Musterfrau", LocalDate.of(2021,10,14));
         //getAgeReturns10YearsIfBornIn2009() //2021-10=2011
-        Person p6 = new Person("Maxüi","Maxümann", LocalDate.of(2011,10,15));
+
 
         //System.out.println("p1: "+p1.getAge());
         System.out.println("p2: "+p2.getAge());
         System.out.println("p3: "+p3.getAge());
 
-        System.out.println("p5: "+p5.getAge());
 
-        System.out.println("p6 10: "+p6.getAge());
-        System.out.println("p6 name ü: "+p6.getFullName());
 
     }
 }
