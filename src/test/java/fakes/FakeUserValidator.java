@@ -1,15 +1,15 @@
 package fakes;
 
 public class FakeUserValidator extends UserValidator{
-    private boolean userOk = true;
+    private boolean userExists;
 
 
     @Override
     public boolean doesUsernameExist(String username) {
-        return this.userOk;
+        return this.userExists;
     }
 
-    public void setUserOk(boolean userOk) {
-        this.userOk = userOk;
+    public void setUserExists(boolean userExists) {
+        this.userExists = userExists;
     }
 }

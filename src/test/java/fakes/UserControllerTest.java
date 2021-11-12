@@ -4,15 +4,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.*;
 
 class UserControllerTest {
 
@@ -56,7 +54,7 @@ class UserControllerTest {
 
       FakeUserValidator fakeUserValidator = new FakeUserValidator();
       // User wurde nicht erkannt
-      fakeUserValidator.setUserOk(false);
+      fakeUserValidator.setUserExists(false);
       UserController ctrl = new UserController(fakeUserValidator, new MockDatabase());
       User user = new User("kalua");
 
@@ -70,7 +68,7 @@ class UserControllerTest {
       // check
       FakeUserValidator fakeUserValidator = new FakeUserValidator();
       // User wurde erkannt
-      fakeUserValidator.setUserOk(true);
+      fakeUserValidator.setUserExists(true);
       UserController ctrl = new UserController(fakeUserValidator, new MockDatabase());
       User user = new User("kalua");
 
@@ -81,20 +79,22 @@ class UserControllerTest {
 
     @Test
     void withValidInexistingUsername_returnsOK__MOCKITO() {
-      // TODO
       Database mockDatabase = mock(Database.class);
-      final UserValidator uv = new UserValidator();
-
-      List users = new ArrayList();
-      users.add("Peter");
-      doReturn(users).when(mockDatabase).getUsers();
-
-      UserController mockCtrl = mock(UserController.class);
-
+      UserValidator uv = mock(UserValidator.class);
+      UserController ctrl = new UserController(uv, mockDatabase);
       User user = new User("kalua");
 
-      Message result = mockCtrl.create(user);
-      Assertions.assertEquals(result.status, Message.Status.NOT_OK);
+      // konfiguriere die rueckgabewerte der mockten-methoden
+      doReturn(true).when(uv).isValidUsername(anyString());
+      doReturn(false).when(uv).doesUsernameExist(anyString());
+
+      Message result = ctrl.create(user);
+
+      // pruefe, dass isValidUsername einmal aufgerufen wurde
+      verify(uv, times(1)).isValidUsername(anyString());
+      verify(uv, times(1)).doesUsernameExist(anyString());
+
+      Assertions.assertEquals(result.status, Message.Status.OK);
     }
 
     @Test
@@ -113,31 +113,37 @@ class UserControllerTest {
     }
     @Test
     void withValidInexistingUsername_addUserToDB__FAKE() {
-      // TODO
       // Der Test soll prüfen, ob der Benutzer tatsächlich der DB hinzugefügt wurde.
       // Dazu soll ein Database Mock Objekt verwendet werden.
       FakeUserValidator fakeUserValidator = new FakeUserValidator();
-      // User wurde erkannt
-      fakeUserValidator.setUserOk(true);
+      // User in der DB vorhanden simulieren
+      fakeUserValidator.setUserExists(false);
       MockDatabase database = new MockDatabase();
       UserController ctrl = new UserController(fakeUserValidator, database);
-      User user = new User("peter");
+      User user = new User("kurt");
 
       Message result = ctrl.create(user);
-      Assertions.assertEquals(result.status, Message.Status.NOT_OK);
+      Assertions.assertEquals(result.status, Message.Status.OK);
 
-      boolean doesUserExists = false;
-      for(User u : database.getUsers()){
-        if (u.getUsername().equals("peter")){
-          doesUserExists = true;
-        }
-      }
-      Assertions.assertTrue(doesUserExists);
+      // pruefen ob der username wirklich in der mockDB eingetragen wurde
+      Assertions.assertTrue(database.doesUsernameExists(user.getUsername()));
     }
 
     @Test
     void withValidInexistingUsername_addUserToDB__MOCKITO() {
-      // TODO
+      UserValidator uv = mock(UserValidator.class);
+      Database db = mock(Database.class);
+      UserController ctrl = new UserController(uv, db);
+      User user = new User("kalua");
+
+      doReturn(true).when(uv).isValidUsername(anyString());
+      doReturn(false).when(uv).doesUsernameExist(anyString());
+
+      Message result = ctrl.create(user);
+      verify(uv, times(1)).isValidUsername(anyString());
+      verify(uv, times(1)).doesUsernameExist(anyString());
+
+      Assertions.assertEquals(result.status, Message.Status.OK);
     }
 
     // --- Testing Exceptions ---
