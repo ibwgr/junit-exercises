@@ -1,6 +1,8 @@
 package assertions;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import java.time.Period;
 
 import java.time.LocalDate;
 
@@ -10,30 +12,41 @@ class PersonTest {
 
     @Test
     void getFullNameReturnsFirstnameSpaceLastname(){
-        // TODO implement
-        throw new IllegalArgumentException("you should implement code here");
+        Person p = new Person("Urs", "Heusser", LocalDate.of(2000,1,15));
+        String s = "Urs Heusser";
+        Assertions.assertEquals(s, p.getFullName());
     }
 
-    // TODO some more useful tests
+    @Test
+    void getFullNameHasASpace() {
+        Person p = new Person("Urs", "Heusser", LocalDate.of(2000,1,15));
+        String fn = p.getFullName();
+        Assertions.assertTrue(fn.contains(" "));
+    }
 
 
     // --- getAge
 
     @Test
-    void getAgeReturns10YearsIfBornIn2009() throws Exception {
-        // TODO verbessern. Hinweis: Repeatable (wiederholbar) zu jeder Zeit.
-        Person p = new Person("", "", LocalDate.of(2009, 1, 1));
-
-        throw new IllegalArgumentException("you should implement code here");
+    void getAgeReturns10YearsIfBornThenYearsAgo()  {
+        Person p = new Person("", "", LocalDate.now().minusYears(10));
+        Period age = p.getAge();
+        Assertions.assertEquals(10, age.getYears());
     }
 
     @Test
-    void getAgeReturns1DayIfYesterday() throws Exception {
+    void getAgeReturns1DayIfBornYesterday()  {
         Person p = new Person("", "", LocalDate.now().minusDays(1));
+        Period age = p.getAge();
 
-        // TODO implement
-        throw new IllegalArgumentException("you should implement code here");
+        Assertions.assertEquals(1, age.getDays());
+        Assertions.assertEquals(0, age.getMonths());
     }
 
-    // TODO some more useful tests
+    @Test
+    void getAgeHasToBePositive() {
+        Person p = new Person("", "", LocalDate.now().minusYears(22).minusDays(543).minusMonths(2938));
+        Period age = p.getAge();
+        Assertions.assertFalse(age.isNegative(), "Alter darf nicht negativ sein!");
+    }
 }

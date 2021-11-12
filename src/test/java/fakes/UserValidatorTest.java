@@ -1,5 +1,6 @@
 package fakes;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -10,22 +11,27 @@ class UserValidatorTest {
 
         @Test
         void returnsTrueIfOnlyLetters(){
-            throw new IllegalArgumentException("you should implement code here");
+            User user = new User("kalua");
+            Assertions.assertTrue(user.usernameOnlyLetters());
         }
 
         @Test
         void returnsFalseIfStartsWithNumber(){
-            throw new IllegalArgumentException("you should implement code here");
+            User user = new User("kalua");
+            char firstChar = user.getUsername().charAt(0);
+            Assertions.assertFalse(Character.isDigit(firstChar));
         }
 
         @Test
         void returnsTrueIfContainsNumberButNotAsFirstChar(){
-            throw new IllegalArgumentException("you should implement code here");
+            User user = new User("ka2lua");
+            Assertions.assertTrue(user.usernameContainsNumberButNotAsFirstChar());
         }
 
         @Test
         void returnsFalseIfContainsAnyNonAlphanumericChar(){
-            throw new IllegalArgumentException("you should implement code here");
+            User user = new User("k9al8ua");
+            Assertions.assertTrue(user.usernameContainsAnyNonAlphaNumericChar());
         }
     }
 
@@ -33,17 +39,23 @@ class UserValidatorTest {
 
         @Test
         void returnsFalseIfUsernameNotInDBYet(){
-            throw new IllegalArgumentException("you should implement code here");
+            Database db = FileDatabase.getInstance();
+            User user = new User("kalua");
+            Assertions.assertTrue(db.doesUsernameExists(user.getUsername()));
         }
 
         @Test
         void returnsTrueIfUsernameInDB(){
-            throw new IllegalArgumentException("you should implement code here");
+            this.returnsFalseIfUsernameNotInDBYet();
         }
 
         @Test
         void returnsTrueIfSameNameInDBButWithDifferentLetterCasing(){
-            throw new IllegalArgumentException("you should implement code here");
+            User user = new User("Kalua");
+
+            boolean result = false;
+            Database db = FileDatabase.getInstance();
+            Assertions.assertTrue(db.doesUsernameExists(user.getUsername()));
         }
     }
 }

@@ -1,17 +1,23 @@
 package fakes;
 
 public class UserController {
+    private UserValidator userValidator;
+    private Database db;
+   // private static Database db = FileDatabase.getInstance();
 
-    private static Database db = FileDatabase.getInstance();
+    public UserController(UserValidator userValidator, Database database) {
+        this.userValidator = userValidator;
+        this.db = database;
+    }
 
     public Message create(User user){
         if(user == null){
             throw new IllegalArgumentException("user required");
         }
-        Boolean canCreate = UserValidator.isValidUsername(user.getUsername())
-                            && !UserValidator.doesUsernameExist(user.getUsername());
+        Boolean canCreate = this.userValidator.isValidUsername(user.getUsername())
+                            && !this.userValidator.doesUsernameExist(user.getUsername());
         if(canCreate){
-            db.addUser(user);
+            this.db.addUser(user);
             return Message.createOK();
         }else{
             return Message.createNotOK();

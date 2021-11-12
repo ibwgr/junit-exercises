@@ -20,9 +20,12 @@ public class FileDatabase extends Database {
         return instance;
     }
 
-    private final String PATH = "src/main/resources/db.txt";
+    private static final String PATH = "src/main/resources/db.txt";
     private final Path dbPath = Paths.get(PATH);
 
+    public static String getPath() {
+        return PATH;
+    }
     public FileDatabase(){
         File f = new File(dbPath.toString());
         if(!f.exists()){
