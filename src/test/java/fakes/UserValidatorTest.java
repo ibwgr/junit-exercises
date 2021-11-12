@@ -8,6 +8,7 @@ class UserValidatorTest {
 
     /**
      * Alle Tests in der folgenden Klasse isValidUsername sollen die Methode UserValidator.isValidUsername testen.
+     * Damit alle Tests grün werden, musst du die Implementation von UserValidator.isValidUsername anpassen!
      */
     @Nested
     class isValidUsername {
@@ -36,6 +37,7 @@ class UserValidatorTest {
 
     /**
      * Alle Tests in der folgenden Klasse doesUsernameExist sollen die Methode UserValidator.doesUsernameExist testen.
+     * Damit alle Tests grün werden, musst du die Implementation von UserValidator.doesUsernameExist anpassen!
      */
     static class doesUsernameExist {
         @Test
