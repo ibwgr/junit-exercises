@@ -1,5 +1,7 @@
 package fakes;
 
+import javax.xml.crypto.Data;
+
 public class UserValidator {
 
     private static Database db = FileDatabase.getInstance();
