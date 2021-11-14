@@ -1,49 +1,76 @@
 package fakes;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 class UserValidatorTest {
 
+    /**
+     * Alle Tests in der folgenden Klasse isValidUsername sollen die Methode UserValidator.isValidUsername testen.
+     * Damit alle Tests grün werden, musst du die Implementation von UserValidator.isValidUsername anpassen!
+     */
     @Nested
-    class isValidUsername{
+    class isValidUsername {
 
         @Test
-        void returnsTrueIfOnlyLetters(){
-            throw new IllegalArgumentException("you should implement code here");
+        void returnsTrueIfOnlyLetters() {
+            // TODO Testcode anpassen, damit er das testet was der Testname sagt.
+            Assertions.assertTrue(new UserValidator().isValidUsername(null));
         }
 
         @Test
         void returnsFalseIfStartsWithNumber(){
-            throw new IllegalArgumentException("you should implement code here");
+            // TODO implement test
         }
 
         @Test
-        void returnsTrueIfContainsNumberButNotAsFirstChar(){
-            throw new IllegalArgumentException("you should implement code here");
+        void returnsTrueIfContainsNumberButNotAsFirstChar() {
+            // TODO implement test
         }
 
         @Test
-        void returnsFalseIfContainsAnyNonAlphanumericChar(){
-            throw new IllegalArgumentException("you should implement code here");
+        void returnsFalseIfContainsAnyNonAlphanumericChar() {
+            // TODO implement test
         }
     }
 
-    static class doesUsernameExist{
-
+    /**
+     * Alle Tests in der folgenden Klasse doesUsernameExist sollen die Methode UserValidator.doesUsernameExist testen.
+     * Damit alle Tests grün werden, musst du die Implementation von UserValidator.doesUsernameExist anpassen!
+     */
+    static class doesUsernameExist {
         @Test
-        void returnsFalseIfUsernameNotInDBYet(){
-            throw new IllegalArgumentException("you should implement code here");
+        void returnsFalseIfUsernameNotInDBYet__FAKE() {
+            // TODO implementiere / ergänze den Test hier, so dass dieser kompiliert und grün ist.
+
+            // boolean usernameExist = uv.doesUsernameExist("peter");
+
+            // Assertions.assertFalse(usernameExist);
         }
 
         @Test
-        void returnsTrueIfUsernameInDB(){
-            throw new IllegalArgumentException("you should implement code here");
+        void returnsFalseIfUsernameNotInDBYet__MOCKITO() {
+            // TODO implement test
         }
 
         @Test
-        void returnsTrueIfSameNameInDBButWithDifferentLetterCasing(){
-            throw new IllegalArgumentException("you should implement code here");
+        void returnsTrueIfUsernameInDB__FAKE() {
+            // TODO implementiere / ergänze den Test hier, so dass dieser kompiliert und grün ist.
+
+            // boolean usernameExist = uv.doesUsernameExist("peter");
+
+            // Assertions.assertTrue(usernameExist);
+        }
+
+        @Test
+        void returnsTrueIfUsernameInDB__MOCKITO() {
+            // TODO implement test
+        }
+
+        @Test
+        void returnsTrueIfSameNameInDBButWithDifferentLetterCasing() {
+            // TODO implement test
         }
     }
 }
