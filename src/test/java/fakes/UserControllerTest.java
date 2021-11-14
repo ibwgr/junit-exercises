@@ -16,7 +16,7 @@ class UserControllerTest {
     @org.junit.jupiter.api.Disabled
     void withValidInexistingUsername_returnsOK__NO_FAKE_DEMO() {
       // Arrange
-      UserController ctrl = new UserController();
+      UserController ctrl = new UserController(new UserValidator(), FileDatabase.getInstance());
       User user = new User("kalua");
 
       // Act
@@ -73,7 +73,7 @@ class UserControllerTest {
     @Test
     void withNullUser_throwsIllegalArgumentExc__TRY_CATCH() {
       try {
-        UserController ctrl = new UserController();
+        UserController ctrl = new UserController(new UserValidator(), FileDatabase.getInstance());
         ctrl.create(null);
         Assertions.fail("No IllegalArgumentException was thrown");
       } catch (IllegalArgumentException ex) {
@@ -85,7 +85,7 @@ class UserControllerTest {
     @Test
     void withNullUser_throwsIllegalArgumentException__THROWN() {
       Assertions.assertThrows(IllegalArgumentException.class, () -> {
-        UserController ctrl = new UserController();
+        UserController ctrl = new UserController(new UserValidator(), FileDatabase.getInstance());
         ctrl.create(null);
       });
     }
@@ -93,7 +93,7 @@ class UserControllerTest {
     @Test
     void withNullUser_throwsIllegalArgumentExceptionWithMessage__THROWN_MESSAGE() {
       Exception thrown = Assertions.assertThrows(IllegalArgumentException.class, () -> {
-        UserController ctrl = new UserController();
+        UserController ctrl = new UserController(new UserValidator(), FileDatabase.getInstance());
         ctrl.create(null);
       });
       Assertions.assertTrue(thrown.getMessage().contains("required"));
