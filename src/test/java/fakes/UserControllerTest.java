@@ -4,6 +4,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.*;
+
 class UserControllerTest {
 
   // Pro getestete Methode gibt es eine inner class (Hier für UserController.create)
@@ -41,11 +45,23 @@ class UserControllerTest {
       // 3. Assert: Rückgabewert von UserController.create prüfen
 
       // TODO implement test
+      UserValidator userValidator = new FakeUserValidator(false,true);
+      UserController controller = new UserController(userValidator);
+      User user = new User("kalua");
+      Message result = controller.create(user);
+      Assertions.assertEquals(Message.Status.OK,result.status);
     }
 
     @Test
     void withValidInexistentUsername_returnsOK__MOCKITO() {
-      // TODO implement test
+      UserValidator userValidator = mock(UserValidator.class);
+      when(userValidator.isValidUsername(anyString())).thenReturn(true);
+      when(userValidator.doesUsernameExist(anyString())).thenReturn(false);
+
+      UserController controller = new UserController(userValidator);
+      User user = new User("kalua");
+      Message result = controller.create(user);
+      Assertions.assertEquals(Message.Status.OK,result.status);
     }
 
     @Test
@@ -56,6 +72,12 @@ class UserControllerTest {
       // TODO implement test
       // Tipp: Wie kann dein Test feststellen, ob der UserController der Datenbank einen Benutzer hinzugefügt hat?
       //   Welche Art von Fake (Stub oder Mock) kann dir weiterhelfen?
+
+      UserValidator userValidator = new FakeUserValidator(false,true);
+      Database db = new FakeDatabase();
+      UserController controller = new UserController(userValidator, db);
+      controller.create(new User("a"));
+      Assertions.assertEquals("a",db.getUsers().get(0).getUsername());
     }
 
     @Test
@@ -65,7 +87,14 @@ class UserControllerTest {
 
       // Tipp: Du kannst prüfen, ob der User hinzugefügt wurde,
       //  indem du prüfst wie of die Methode Database.addUser aufgerufen wurde.
-      // TODO implement test
+      UserValidator userValidator = mock(UserValidator.class);
+      when(userValidator.isValidUsername(anyString())).thenReturn(true);
+      when(userValidator.doesUsernameExist(anyString())).thenReturn(false);
+
+      Database db = mock(FakeDatabase.class);
+      UserController controller = new UserController(userValidator,db);
+      controller.create(new User("a"));
+      verify(db, times(1)).addUser(any(User.class));
     }
 
     // --- Testing Exceptions ---
