@@ -108,6 +108,9 @@ class UserControllerTest {
       UserController uc = new UserController(uv, db);
       User user = new User("kalua");
 
+      doReturn(true).when(uv).isValidUsername(anyString());
+      // eigentlich müsste untenstehende anweisung rein, ergibt jedoch einen error... keine ahnung wieso.
+      //doReturn(true).when(uv).doesUsernameExist(anyString());
 
       /* ACT */
       Message result = uc.create(user);

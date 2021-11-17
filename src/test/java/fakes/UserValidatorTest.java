@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
@@ -127,12 +129,20 @@ class UserValidatorTest {
         void returnsTrueIfUsernameInDB__MOCKITO() {
             // -> implement test
             /* ARRANGE */
-            UserValidator uv = mock(UserValidator.class);
-            doReturn(true).when(uv).doesUsernameExist(anyString());
+            FileDatabase db = mock(FileDatabase.class);
+            User user = new User("peter");
+
+            // mock-db soll user zurueckgeben, wenn danach gefragt wird
+            List<User> users = db.getUsers();
+            users.add(user);
+            doReturn(users).when(db).getUsers();
+
+            // uservalidator nutzt die mockte db
+            UserValidator uv = new UserValidator(db);
 
             /* ACT */
-            boolean usernameInDb = uv.doesUsernameExist("peter");
-            verify(uv, times(1)).doesUsernameExist(anyString());
+            boolean usernameInDb = uv.doesUsernameExist(user.getUsername());
+            System.out.println(usernameInDb);
 
             /* ASSERT */
             Assertions.assertTrue(usernameInDb);
@@ -143,9 +153,6 @@ class UserValidatorTest {
             // -> implement test
             /* ARRANGE */
             UserValidator uv = new UserValidator();
-            User userVorhanden = new User("kalua");
-            UserController uc = new UserController(uv, FileDatabase.getInstance());
-            uc.create(userVorhanden);
             User user = new User("kAlUa");
 
             /* ACT */

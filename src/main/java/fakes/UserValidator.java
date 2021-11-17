@@ -3,8 +3,14 @@ package fakes;
 import java.util.Locale;
 
 public class UserValidator {
+    private static Database db;
 
-    private static Database db = FileDatabase.getInstance();
+    public UserValidator() {
+        this.db = FileDatabase.getInstance();
+    }
+    public UserValidator(Database db) {
+        this.db = db;
+    }
     public boolean doesUsernameExist(String username){
 //        try {
 //            Thread.sleep(5000);
