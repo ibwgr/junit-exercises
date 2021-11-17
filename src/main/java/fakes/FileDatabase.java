@@ -48,8 +48,14 @@ public class FileDatabase extends Database {
 
     @Override
     public List<User> getUsers() {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         List<User> users = null;
-        try(Stream<String> stream = Files.lines(dbPath)){
+        try (Stream<String> stream = Files.lines(dbPath)) {
             users = stream
                     .map(String::trim)
                     .filter(line -> line.length() > 0)
