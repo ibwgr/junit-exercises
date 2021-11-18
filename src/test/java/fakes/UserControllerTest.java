@@ -93,7 +93,7 @@ class UserControllerTest {
         }
 
         @Test
-        void withValidInexistentUsername_returnsNOT_OK__MOCKITO() {
+        void withValidExistingUsername_returnsNOT_OK__MOCKITO() {
             // TODO implement test
             //Arrange Mockito erstellen (Fake UserValidator mit Mockito)
             UserValidator mockitoUv = mock(UserValidator.class);
@@ -128,17 +128,16 @@ class UserControllerTest {
             //Act
             ctrl.create(user);
             boolean userInDB;
-            userInDB = mockDb.getUsers() == mockDb.users;
+            userInDB = mockDb.getUsers().contains(user);
 
             //Assert
-            // Zwei möglichkeiten für assert
             Assertions.assertTrue(userInDB);
-            Assertions.assertEquals(mockDb.getUsers(), mockDb.users);
+
 
 
         }
         @Test
-        void withValidInexistentUsername_shouldNOT_AddUserToDB__FAKE() {
+        void withInValidInexistentUsername_shouldNOT_AddUserToDB__FAKE() {
             // Der Test soll prüfen, ob der Benutzer tatsächlich der DB hinzugefügt wurde.
             // Dazu soll ein Mock-Objekt für die Database Klasse verwendet werden.
 
@@ -185,7 +184,7 @@ class UserControllerTest {
 
         }
         @Test
-        void withValidInexistentUsername_shouldNOT_AddUserToDB__MOCKITO() {
+        void withInValidInexistentUsername_shouldNOT_AddUserToDB__MOCKITO() {
             // Der Test soll prüfen, ob der Benutzer tatsächlich der DB hinzugefügt wurde.
             // Dazu soll ein Mock-Objekt für die Database Klasse verwendet werden.
 
@@ -193,12 +192,12 @@ class UserControllerTest {
             //  indem du prüfst wie of die Methode Database.addUser aufgerufen wurde.
             // TODO implement test
             //Arrange
-            Database mockitoDb = mock(FileDatabase.class);
+            Database mockitoDb = mock(Database.class);
             UserValidator mockitoUv = mock(UserValidator.class);
             UserController ctrl = new UserController(mockitoDb, mockitoUv);
             //Wenn methoden isValidUsername && doesUsernameExist.thenReturn (Boolean wert)
-            when(mockitoUv.isValidUsername(anyString())).thenReturn(false);
-            when(mockitoUv.doesUsernameExist(anyString())).thenReturn(false);
+            when(mockitoUv.isValidUsername(anyString())).thenReturn(true);
+            when(mockitoUv.doesUsernameExist(anyString())).thenReturn(true);
             User user = new User("Hampi");
 
             //act
