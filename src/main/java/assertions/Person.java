@@ -22,4 +22,15 @@ public class Person {
     public Period getAge(){
         return Period.between(birthDate, LocalDate.now());
     }
+
+    public Boolean isTeen(int years){
+        // Is teen if Age 12 <= && >=18
+        Period age = getAge();
+        years =  age.getYears();
+        if (years >= 12 && years <= 18){
+            return true;
+        }
+        return false;
+
+    }
 }
