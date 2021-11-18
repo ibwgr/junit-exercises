@@ -5,7 +5,7 @@ public class UserController {
     private static Database db = FileDatabase.getInstance();
 
     private UserValidator userValidator;    //fakeuservalidator         //aus Unterricht
-    private Database database;              //MockDatabase     jedoch MockDatabase db geht nicht              //aus Unterricht
+    private Database database= FileDatabase.getInstance();;              //MockDatabase     jedoch MockDatabase db geht nicht              //aus Unterricht
 
     public UserController(UserValidator UserValidator){//inject db.adduser
         userValidator = UserValidator;

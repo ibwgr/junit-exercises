@@ -25,7 +25,7 @@ class UserControllerTest {
 
       // Arrange
       UserController ctrl = new UserController(new FakeUserValidator());
-      User user = new User("kalua");
+      User user = new User("peter");//kalua
 
       // Act
       Message result = ctrl.create(user);
@@ -49,13 +49,12 @@ class UserControllerTest {
       // 3. Assert: Rückgabewert von UserController.create prüfen
 
       // TODO implement test
-//      UserController ctrl = new UserController(new FakeUserValidator(false));//false
-////kopie von Methode oben
-//      User user = new User("peter");//peter
-//
-//      Message result = ctrl.create(user);
-//
-//      Assertions.assertEquals(result.status, Message.Status.OK);
+      UserController uc1 = new UserController(new FakeUserValidator());//false
+      User u11 = new User("hanso");//peter
+
+      Message result = uc1.create(u11);
+
+      Assertions.assertEquals(result.status, Message.Status.OK);
     }
 
     @Test
@@ -77,11 +76,11 @@ class UserControllerTest {
 
       User user1 = new User("peter");//kalua
       uc1.create(user1);
-
+      System.out.println();
 
 
       Message result = uc1.create(user1);
-
+      System.out.println("result: "+result);
       Assertions.assertEquals(result.status, Message.Status.OK);
 
     }

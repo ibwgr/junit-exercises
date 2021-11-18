@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class MockDatabase extends Database{       //Name Mock okay; weil extends, hat addUser + getUser, weil original database ist abstract
 
-    //List<User> mockList = new ArrayList<>();    //irgendwie mit Zeit kann man sich vorstellen, warum man diese Liste mit Objekten braucht
+    //List<User> mockList = new ArrayList<>();    //irgendwie mit Zeit kann man sich vorstellen, warum man diese Liste mit Objekten braucht, bzw, wahrscheinlich, dasmit man es auch bei anderen sachen benutzen kann...
     List<User> users = new ArrayList<>();         //damit stand von Schule...
     @Override
     public void addUser(User user){
