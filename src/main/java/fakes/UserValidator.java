@@ -20,7 +20,7 @@ public class UserValidator {
 
     /**
      * Es gibt verschiedene Varianten diese Methode zu implementieren. Auf
-     * https://github.com/ibwgr/junit-exercises/commit/3d762d78399812ac32c9c4346264bef98e011415 
+     * https://github.com/ibwgr/junit-exercises/commit/3d762d78399812ac32c9c4346264bef98e011415
      * siehst du weitere Möglichkeiten.
      */
     public boolean isValidUsername(String username) {
@@ -30,7 +30,7 @@ public class UserValidator {
         if (Character.isDigit(username.charAt(0))) {
             return false;
         }
-        if (checkForLettersOnly(username)) {
+        if (containsForLettersOnly(username)) {
             return true;
         }
         if (containsNumberButNotAsFirstChar(username)) {
@@ -40,22 +40,22 @@ public class UserValidator {
     }
 
 
-    private boolean checkForLettersOnly(String name) {
+    private boolean containsForLettersOnly(String name) {
         return validUsernamePattern.matcher(name).matches();
     }
 
     private boolean containsNonAlphanumericChar(String name) {
-        boolean noAlphanumeric = false;
+        boolean hasNonAlphanumeric = false;
 
         if (name != null && !name.isEmpty()) {
             for (char c : name.toCharArray()) {
                 if (!Character.isLetterOrDigit(c)) {
-                    noAlphanumeric = true;
+                    hasNonAlphanumeric = true;
                     break;
                 }
             }
         }
-        return noAlphanumeric;
+        return hasNonAlphanumeric;
     }
 
     private boolean containsNumberButNotAsFirstChar(String name) {

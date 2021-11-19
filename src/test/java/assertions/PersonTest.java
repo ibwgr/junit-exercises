@@ -21,9 +21,6 @@ class PersonTest {
 
   // TODO some more useful tests
 
-  // getAge
-
-
   // --- getAge
 
   @Test
@@ -48,5 +45,5 @@ class PersonTest {
     Assertions.assertEquals(1, age.getDays());
   }
 
-    // TODO some more useful tests
+  // TODO some more useful tests
 }
