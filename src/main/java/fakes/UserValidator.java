@@ -19,8 +19,9 @@ public class UserValidator {
     }
 
     /**
-     * Es gibt verschiedene Varianten diese Methode zu implementieren. Folgende Varianten erfüllen die funktionalen Anforderungen:
-     * https://github.com/ibwgr/junit-exercises/commit/3d762d78399812ac32c9c4346264bef98e011415 siehst du weitere Möglichkeiten.
+     * Es gibt verschiedene Varianten diese Methode zu implementieren. Auf
+     * https://github.com/ibwgr/junit-exercises/commit/3d762d78399812ac32c9c4346264bef98e011415 
+     * siehst du weitere Möglichkeiten.
      */
     public boolean isValidUsername(String username) {
         if (containsNonAlphanumericChar(username)) {
