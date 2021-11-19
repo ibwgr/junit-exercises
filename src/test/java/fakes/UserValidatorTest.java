@@ -4,6 +4,11 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+
 class UserValidatorTest {
 
     /**
@@ -14,24 +19,39 @@ class UserValidatorTest {
     class isValidUsername {
 
         @Test
-        void returnsTrueIfOnlyLetters() {
-            // TODO Testcode anpassen, damit er das testet was der Testname sagt.
-            Assertions.assertTrue(new UserValidator().isValidUsername(null));
+        public void returnsTrueIfOnlyLetters() {
+            UserValidator userValidator = new UserValidator();
+
+            boolean valid = userValidator.isValidUsername("Hans");
+
+            Assertions.assertTrue(valid);
         }
 
         @Test
-        void returnsFalseIfStartsWithNumber(){
-            // TODO implement test
+        public void returnsFalseIfStartsWithNumber() {
+            UserValidator userValidator = new UserValidator();
+
+            boolean valid = userValidator.isValidUsername("1Hans");
+
+            Assertions.assertFalse(valid);
         }
 
         @Test
-        void returnsTrueIfContainsNumberButNotAsFirstChar() {
-            // TODO implement test
+        public void returnsTrueIfContainsNumberButNotAsFirstChar() {
+            UserValidator userValidator = new UserValidator();
+
+            boolean valid = userValidator.isValidUsername("Hans1");
+
+            Assertions.assertTrue(valid);
         }
 
         @Test
-        void returnsFalseIfContainsAnyNonAlphanumericChar() {
-            // TODO implement test
+        public void returnsFalseIfContainsAnyNonAlphanumericChar() {
+            UserValidator userValidator = new UserValidator();
+
+            boolean valid = userValidator.isValidUsername("Hans-Peter");
+
+            Assertions.assertFalse(valid);
         }
     }
 
@@ -42,35 +62,55 @@ class UserValidatorTest {
     static class doesUsernameExist {
         @Test
         void returnsFalseIfUsernameNotInDBYet__FAKE() {
-            // TODO implementiere / ergänze den Test hier, so dass dieser kompiliert und grün ist.
+            Database db = new FakeDatabase();
+            final UserValidator userValidator = new UserValidator(db);
 
-            // boolean usernameExist = uv.doesUsernameExist("peter");
+            boolean usernameExist = userValidator.doesUsernameExist("peter");
 
-            // Assertions.assertFalse(usernameExist);
+            Assertions.assertFalse(usernameExist);
         }
 
         @Test
         void returnsFalseIfUsernameNotInDBYet__MOCKITO() {
-            // TODO implement test
+            Database db = mock(Database.class);
+            final UserValidator userValidator = new UserValidator(db);
+
+            boolean usernameExist = userValidator.doesUsernameExist("peter");
+
+            Assertions.assertFalse(usernameExist);
         }
 
         @Test
         void returnsTrueIfUsernameInDB__FAKE() {
-            // TODO implementiere / ergänze den Test hier, so dass dieser kompiliert und grün ist.
+            Database db = new FakeDatabase();
+            final UserValidator userValidator = new UserValidator(db);
+            db.addUser(new User("peter"));
 
-            // boolean usernameExist = uv.doesUsernameExist("peter");
+            boolean usernameExist = userValidator.doesUsernameExist("peter");
 
-            // Assertions.assertTrue(usernameExist);
+            Assertions.assertTrue(usernameExist);
         }
 
         @Test
         void returnsTrueIfUsernameInDB__MOCKITO() {
-            // TODO implement test
+            Database db = mock(Database.class);
+            final UserValidator userValidator = new UserValidator(db);
+            doReturn(Arrays.asList(new User("peter"))).when(db).getUsers();
+
+            boolean usernameExist = userValidator.doesUsernameExist("peter");
+
+            Assertions.assertTrue(usernameExist);
         }
 
         @Test
         void returnsTrueIfSameNameInDBButWithDifferentLetterCasing() {
-            // TODO implement test
+            Database db = mock(Database.class);
+            final UserValidator userValidator = new UserValidator(db);
+            doReturn(Arrays.asList(new User("PETER"))).when(db).getUsers();
+
+            boolean usernameExist = userValidator.doesUsernameExist("peter");
+
+            Assertions.assertTrue(usernameExist);
         }
     }
 }
