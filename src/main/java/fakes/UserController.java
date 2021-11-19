@@ -19,8 +19,8 @@ public class UserController {
         if(user == null){
             throw new IllegalArgumentException("user required");
         }
-        Boolean canCreate = userValidator.isValidUsername(user.getUsername())       //aus Unterricht    //static bei Uservalidator weg, dann hier Uservalidator klein , weil hier oberhalb konstruktor eine instanz reinkommt irgendwas hier rein komt
-                && !userValidator.doesUsernameExist(user.getUsername());    //aus Unterricht
+        Boolean canCreate = false;//userValidator.isValidUsername(user.getUsername())       //aus Unterricht    //static bei Uservalidator weg, dann hier Uservalidator klein , weil hier oberhalb konstruktor eine instanz reinkommt irgendwas hier rein komt
+                //&& !userValidator.doesUsernameExist(user.getUsername());    //aus Unterricht// nur mal für erste test
         if(canCreate){
             db.addUser(user);//db
             database.addUser(user);

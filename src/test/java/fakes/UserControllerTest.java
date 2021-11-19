@@ -66,6 +66,12 @@ class UserControllerTest {
 
       //MockDatabase md1= new MockDatabase();//findet mockdatabase nicht, muss er finden, oder override
 
+
+
+
+
+
+
       Database mockDatabase = new MockDatabase();
       mockDatabase.addUser(new User("Hand"));
       System.out.println("irgendwas: "+mockDatabase.getUsers());
@@ -125,19 +131,19 @@ class UserControllerTest {
     // --- Testing Exceptions ---
 
     @Test
-    void withNullUser_throwsIllegalArgumentExc__TRY_CATCH() {
+    void withNullUser_throwsIllegalArgumentExc__TRY_CATCH() {//test von Folie
       try {
         UserController ctrl = new UserController(new FakeUserValidator());
         ctrl.create(null);
         Assertions.fail("No IllegalArgumentException was thrown");
-      } catch (IllegalArgumentException ex) {
+      } catch (IllegalArgumentException ex) {//ist in usercontroller implementiert
         // Optional: Test message
         Assertions.assertEquals("user required", ex.getMessage());
       }
     }
 
     @Test
-    void withNullUser_throwsIllegalArgumentException__THROWN() {
+    void withNullUser_throwsIllegalArgumentException__THROWN() {//braucht kein try catch, kein boolean
       Assertions.assertThrows(IllegalArgumentException.class, () -> {
         UserController ctrl = new UserController(new FakeUserValidator());
         ctrl.create(null);
@@ -150,7 +156,7 @@ class UserControllerTest {
         UserController ctrl = new UserController(new FakeUserValidator());
         ctrl.create(null);
       });
-      Assertions.assertTrue(thrown.getMessage().contains("required"));
+      Assertions.assertTrue(thrown.getMessage().contains("required"));//wie oben, aber mit rückgabewert
     }
   }
 }

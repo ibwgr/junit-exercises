@@ -4,25 +4,32 @@ import java.util.regex.Pattern;
 
 public class UserValidator {
 
-    private static Database db = FileDatabase.getInstance();
+    private  static Database db = FileDatabase.getInstance();//static löschen
+
+    //konstruktor für fake
+    public UserValidator(Database da){
+        this.db = db;
+    }
+    //default konstruktor
+    public UserValidator(){}
 
     // MockDatabase database;              //mockdatabase versuch eigener test..., schule bei usercontroller
     //fakeUservalidator hat gleiche methode, mit override
-    public  boolean doesUsernameExist(String username) {          //static wird im Untericht gelöscht
-        try {
-            Thread.sleep(2000);//5000
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public  boolean doesUsernameExist(String username) {          //static wird im Untericht gelöscht, dann hier auch static löschen
+//        try {
+//            Thread.sleep(2000);//5000
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
-        int zaehler = 0;
+//        int zaehler = 0;
         for (User user : db.getUsers()) {       //Mock aus db wird database
-            zaehler++;
+  //          zaehler++;
             if (user.getUsername().equals(username)) {
                 return true;
             }
         }
-        System.out.println("Zaehler von doesUserNameExist: "+zaehler);
+    //    System.out.println("Zaehler von doesUserNameExist: "+zaehler);
         return false;
     }
 
