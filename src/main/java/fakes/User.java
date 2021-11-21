@@ -9,6 +9,8 @@ public class User {
     }
 
     public String getUsername() {
+
+        System.out.println("User getUserName: Hello Kitty"+username);
         return username;
     }
 }

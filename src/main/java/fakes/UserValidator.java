@@ -7,9 +7,10 @@ public class UserValidator {
     private  static Database db = FileDatabase.getInstance();//static löschen
 
     //konstruktor für fake
-    public UserValidator(Database da){
+    public UserValidator(Database db){
         this.db = db;
     }
+
     //default konstruktor
     public UserValidator(){}
 
@@ -26,6 +27,8 @@ public class UserValidator {
         for (User user : db.getUsers()) {       //Mock aus db wird database
   //          zaehler++;
             if (user.getUsername().equals(username)) {
+                System.out.println("Bitte was? "+user.getUsername().equals(username));
+                System.out.println("Bitte was222 "+user.getUsername());
                 return true;
             }
         }
