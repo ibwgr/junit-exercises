@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import static org.mockito.Matchers.any;
 import static org.mockito.junit.MockitoJUnit.*;
 //import static org.mockito.*;
+import static org.mockito.Mockito.*;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoJUnitRunner.*;
@@ -20,7 +21,7 @@ class UserValidatorTest {//methode die zu testen ist von der klasse
      * Alle Tests in der folgenden Klasse isValidUsername sollen die Methode UserValidator.isValidUsername testen.
      * Damit alle Tests grün werden, musst du die Implementation von UserValidator.isValidUsername anpassen!
      */
-    @Nested//zum testen von der klasse uservalidator, also diese klasse ist sut//bsp ohne fake
+    @Nested//block von test cases
     class isValidUsername {
 
         @Test
@@ -91,14 +92,14 @@ class UserValidatorTest {//methode die zu testen ist von der klasse
         }
 
 
-        @Test//falls user noch nicht in db ist
+        @Test//falls user noch nicht in db ist// (expected = IndexOutOfBoundsException.class)
         void returnsFalseIfUsernameNotInDBYet__MOCKITO() {
             // TODO implement test
 
             //vorteil nicht mehr selber klassen machen, sondern generieren lassen
             Database mokitoDb = Mockito.mock(Database.class);// erstellen mit mokito, also eingeben mockitopunktmock (punktnotation)
-                                            //von der Database-Klasse
-
+                                //static import denn nur mock.(Database.class)   //von der Database-Klasse
+            //Database mokitoDb = mock(Database.class);
            // Mockito.doReturn(Collections.emptyList()).when(db).getUsers();
             //Mockito.doReturn()...
             final UserValidator uv = new UserValidator(mokitoDb);//uservalidator soll Mokitodatenbank nutzen  //ev am schluss final machern
@@ -116,14 +117,32 @@ class UserValidatorTest {//methode die zu testen ist von der klasse
             mokitoDb.addUser(u2);                     //Mokitodb user hinzufügen
             mokitoDb.addUser(u3);
             mokitoDb.addUser(u4);
+
            // Arrays.asList(u4);
             System.out.println("?Arrays.asList?"+Arrays.asList(u4.getUsername()));
             System.out.println("?Arrays.asList?"+Arrays.asList(mokitoDb));
+
+
+    //----------------ist void-der addUser von Database------------------------
+            Mockito.when(mokitoDb.addUser(new User("Ueli"))).thenReturn(uv.doesUsernameExist("Ueli"));
+
           //  System.out.println("?Arrays.asList?"+mokitoDb.addUser(Arrays.asList(u4)));
            //System.out.println("dddd "+Mockito.doReturn(Arrays.asList(u1)))
     //        System.out.println("dddd "+mokitoDb.addUser(Mockito.doReturn(Arrays.asList(u1))) );
     //        System.out.println("dddd "+mokitoDb.addUser(Arrays.asList(u1)) );
-            System.out.println("uu "+ Mockito.doReturn(Collections.emptyList()).when(mokitoDb).getUsers()  );
+ //           System.out.println("uu "+ Mockito.doReturn(Collections.emptyList()).when(mokitoDb).getUsers()  );
+
+
+            //System.out.println("wwww "+Mockito.when(uv.doesUsernameExist("Hansoloo")).thenReturn(false));
+         //   System.out.println("wwww "+Mockito.when(uv..doesUsernameExist("Hansoloo")).thenReturn(false));
+            //     boolean antonboolean = uv.doesUsernameExist("Anton");
+            //        System.out.println("antonboolean "+antonboolean);
+
+//            User user = new User("Martin");
+//            //Mockito Returnwert setzen
+//            Mockito.doReturn(true).when(uv).doesUsernameExist("Martin");
+//            boolean Martinboolean = uv.doesUsernameExist("Martin");
+//            System.out.println("Martinboolean "+Martinboolean);
 
             System.out.println("mokitoDb.getUsers"+mokitoDb.getUsers());//ist leer
             //System.out.println(Mockito.spy(db.getUsers()));spy.get(0)
