@@ -12,6 +12,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoJUnitRunner.*;
 import org.mockito.junit.*;
+import org.w3c.dom.ls.LSOutput;
 
 import java.util.*;
 
@@ -113,10 +114,10 @@ class UserValidatorTest {//methode die zu testen ist von der klasse
             System.out.println("u2 name: "+u2.getUsername());
             System.out.println("u3 name: "+u3.getUsername());
             System.out.println("u43 name: "+u4.getUsername());
-            mokitoDb.addUser(u1);                     //Mokitodb user hinzufügen
+            mokitoDb.addUser(u1);                     //Mokitodb user hinzufügen//ist immer leer
             mokitoDb.addUser(u2);                     //Mokitodb user hinzufügen
             mokitoDb.addUser(u3);
-            mokitoDb.addUser(u4);
+            //mokitoDb.addUser(u4);
 
            // Arrays.asList(u4);
             System.out.println("?Arrays.asList?"+Arrays.asList(u4.getUsername()));
@@ -124,7 +125,21 @@ class UserValidatorTest {//methode die zu testen ist von der klasse
 
 
     //----------------ist void-der addUser von Database------------------------
-            Mockito.when(mokitoDb.addUser(new User("Ueli"))).thenReturn(uv.doesUsernameExist("Ueli"));
+//            Mockito.when(mokitoDb.addUser(new User("Ueli"))).thenReturn(uv.doesUsernameExist("Ueli"));
+////            String str = "";
+////            Mockito.when(mokitoDb.addUser(new User("Ueli"))).thenReturn(str = "Hallo");
+//            Mockito.when(mokitoDb.addUser(new User("Ueli"))).thenAnswer(true);
+//            Mockito.when(mokitoDb.addUser(new User("Ueli")));
+//            Mockito.doNothing();
+//            System.out.println(Mockito.doReturn(Arrays.asList(new User("peter"))).when(mokitoDb).getUsers());//github
+ //---------------------------------------------------------------------------------------
+          //  Mockito.when(service1.add(1,4)).thenReturn(5);
+         //     Mockito.when(mokitoDb.addUser(u4)).thenReturn(u1);
+  //-----------------------------------------------------------------------------------
+            System.out.println(Mockito.doReturn(Arrays.asList(new User("peter"))).when(mokitoDb).getUsers());//github
+            System.out.println("uu "+ Mockito.doReturn(Collections.emptyList()).when(mokitoDb).getUsers()  );//github
+
+
 
           //  System.out.println("?Arrays.asList?"+mokitoDb.addUser(Arrays.asList(u4)));
            //System.out.println("dddd "+Mockito.doReturn(Arrays.asList(u1)))
