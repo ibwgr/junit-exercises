@@ -14,11 +14,11 @@
     
 ### Bei Problemen
 * Unter Einstellungen nach "Java Compiler" suchen
-    * Unter "Target Byte Version" 1.8 einstellen
+    * Unter "Target Byte Version" 11 einstellen
     
     <img src="https://github.com/ibwgr/junit-exercises/raw/master/doc/compiler.png" width="400">
     
-* Unter File > Project Structure > Modules "Language Level" auf 8 einstellen
+* Unter File > Project Structure > Modules "Language Level" auf 11 einstellen (ebenfalls SDK für Java 11 auswählen).
     
     <img src="https://github.com/ibwgr/junit-exercises/raw/master/doc/modules.png" width="400">
     
