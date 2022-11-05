@@ -10,8 +10,12 @@ import java.util.Collections;
 
 class UserValidatorTest {
 
+    /**
+     * Alle Tests in der folgenden Klasse isValidUsername sollen die Methode UserValidator.isValidUsername testen.
+     * Damit alle Tests grün werden, musst du die Implementation von UserValidator.isValidUsername anpassen!
+     */
     @Nested
-    class isValidUsername{
+    class isValidUsername {
 
         @Test
         void returnsTrueIfOnlyLetters(){
@@ -50,7 +54,19 @@ class UserValidatorTest {
         }
     }
 
-    static class doesUsernameExist{
+    /**
+     * Alle Tests in der folgenden Klasse doesUsernameExist sollen die Methode UserValidator.doesUsernameExist testen.
+     * Damit alle Tests grün werden, musst du die Implementation von UserValidator.doesUsernameExist anpassen!
+     */
+    static class doesUsernameExist {
+        @Test
+        void returnsFalseIfUsernameNotInDBYet__FAKE() {
+            // TODO implementiere / ergänze den Test hier, so dass dieser kompiliert und grün ist.
+
+            // boolean usernameExist = uv.doesUsernameExist("peter");
+
+            // Assertions.assertFalse(usernameExist);
+        }
 
         @Test
         void MOCKITO_returnsFalseIfUsernameNotInDBYet(){

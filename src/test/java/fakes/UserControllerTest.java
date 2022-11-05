@@ -13,11 +13,11 @@ import static org.mockito.Mockito.when;
 
 class UserControllerTest {
 
-    // Pro getestete Methode gibt es eine inner class (Hier für UserController.create)
-    @Nested
-    class create{
+  // Pro getestete Methode gibt es eine inner class (Hier für UserController.create)
+  @Nested
+  class create {
 
-        // --- Testing with Fakes ---
+    // --- Testing with Fakes ---
 
         @Test
         void withValidInexistingUsername_returnsOK__NO_FAKE(){
@@ -27,7 +27,8 @@ class UserControllerTest {
             UserController ctrl = new UserController();
             User user = new User("kalua");
 
-            Message result = ctrl.create(user);
+      // Act
+      Message result = ctrl.create(user);
 
             Assertions.assertEquals(Message.Status.OK, result.status);
         }
@@ -88,7 +89,7 @@ class UserControllerTest {
             verify(db, times(1)).addUser(any(User.class));
         }
 
-        // --- Testing Exceptions ---
+    // --- Testing Exceptions ---
 
         @Test
         void TRY_CATCH_withNullUser_throwsIllegalArgumentExc(){
